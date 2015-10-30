@@ -5,24 +5,24 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>OSM Vectortiles with TileStache and OL3</title>
-        
+
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    
+
         <!-- Bootstrap -->
         <!-- Latest compiled and minified CSS / JS-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-        
+
         <!-- MiniColors Plugin -->
         <script src="http://labs.abeautifulsite.net/jquery-minicolors/jquery.minicolors.js"></script>
         <link rel="stylesheet" href="http://labs.abeautifulsite.net/jquery-minicolors/jquery.minicolors.css">
-        
+
         <!-- OL3 -->
-        <link rel="stylesheet" href="http://openlayers.org/en/v3.2.1/css/ol.css" type="text/css">
-        <script src='http://openlayers.org/en/v3.2.1/build/ol-debug.js'></script>
-        
+        <link rel="stylesheet" href="http://openlayers.org/en/v3.10.1/css/ol.css" type="text/css">
+        <script src='http://openlayers.org/en/v3.10.1/build/ol-debug.js'></script>
+
         <!-- app resources -->
         <script src='styles/style-roads-0-2500.js'></script>
         <script src='styles/style-roads-2500-15000.js'></script>
@@ -34,10 +34,10 @@
         <script src='styles/style-roads-2500000-5000000.js'></script>
         <script src='styles/style-roads-5000000-40000000.js'></script>
         <script src='styles/style-landusage.js'></script>
-    
+
     </head>
     <body>
-    
+
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -56,7 +56,7 @@
                 </div>
             </div>
         </nav>
-    
+
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="col-lg-3 sidebar" id="sidebar">
@@ -74,32 +74,32 @@
                                     <ul class="inputs-list">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" id="landusagevisibility"> Landusage</input>
+                                                <input type="checkbox" id="landusagevisibility" checked=true> Landusage</input>
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" id="roadsvisibility"> Roads</input>
+                                                <input type="checkbox" id="roadsvisibility" checked=true> Roads</input>
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" id="buildingsvisibility"> Buildings</input>
+                                                <input type="checkbox" id="buildingsvisibility" checked=true> Buildings</input>
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" id="waterwaysvisibility"> Waterways</input>
+                                                <input type="checkbox" id="waterwaysvisibility" checked=true> Waterways</input>
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" id="waterareasvisibility"> Waterareas</input>
+                                                <input type="checkbox" id="waterareasvisibility" checked=true> Waterareas</input>
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" id="placesvisibility"> Places / Labels</input>
+                                                <input type="checkbox" id="placesvisibility" checked=true> Places / Labels</input>
                                             </label>
                                         </div>
                                     </ul>
@@ -143,7 +143,7 @@
                                </div>
                            </div>
                        </div>
-                    
+
                        <div class="panel panel-default">
                            <div class="panel-heading">
                                <h4 class="panel-title">
@@ -155,27 +155,27 @@
                                    <li><span>Statistics</<span>
                                        <fieldset id="stats">
                                            <fieldset> Roads (all):
-                                               <span name="coordinatepairsroads">not available</span> / 
+                                               <span name="coordinatepairsroads">not available</span> /
                                                <span name="vectorsroads">not available</span>
                                            </fieldset>
                                            <fieldset> Roads (visible):
-                                               <span name="coordinatepairsroadsvisible">not available</span> / 
+                                               <span name="coordinatepairsroadsvisible">not available</span> /
                                                <span name="vectorsroadsvisible">not available</span>
                                            </fieldset><br>
                                            <fieldset> Buildings (all):
-                                               <span name="coordinatepairsbuildings">not available</span> / 
+                                               <span name="coordinatepairsbuildings">not available</span> /
                                                <span name="vectorsbuildings">not available</span>
                                            </fieldset>
                                            <fieldset> Buildings (visible):
-                                               <span name="coordinatepairsbuildingsvisible">not available</span> / 
+                                               <span name="coordinatepairsbuildingsvisible">not available</span> /
                                                <span name="vectorsbuildingsvisible">not available</span>
                                            </fieldset><br>
                                            <fieldset> Landusage (all):
-                                               <span name="coordinatepairslandusage">not available</span> / 
+                                               <span name="coordinatepairslandusage">not available</span> /
                                                <span name="vectorslandusage">not available</span>
                                            </fieldset>
                                            <fieldset> Landusage (visible):
-                                               <span name="coordinatepairslandusagevisible">not available</span> / 
+                                               <span name="coordinatepairslandusagevisible">not available</span> /
                                                <span name="vectorslandusagevisible">not available</span>
                                            </fieldset><br>
                                        </fieldset>

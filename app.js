@@ -12,13 +12,13 @@ var labelThreshold = 8;
  * Create layers for the OL map
  */
 var createLayers = function() {
-    
+
     var layers = [],
         attribution = new ol.Attribution({
             html: '© terrestris GmbH & Co. KG<br>' +
             'Data © OpenStreetMap <a href="http://www.openstreetmap.org/copyright/en" target="_blank">contributors</a>'
         });
-    
+
     this.osmwms = new ol.layer.Tile({
         visible: false,
         source: new ol.source.TileWMS(({
@@ -27,7 +27,7 @@ var createLayers = function() {
             attributions: [attribution]
         }))
     });
-    
+
     this.roads = new ol.layer.Image({
         name: 'roads',
         source: new ol.source.ImageVector({
@@ -38,7 +38,7 @@ var createLayers = function() {
                     defaultProjection: 'EPSG:3857'
                 }),
                 projection: 'EPSG:3857',
-                tileGrid: new ol.tilegrid.XYZ({
+                tileGrid: new ol.tilegrid.createXYZ({
                     minZoom: 0,
                     maxZoom: 19
                 }),
@@ -49,7 +49,7 @@ var createLayers = function() {
                     type = props.type || null,
                     style,
                     scale = getCurrentScale();
-                
+
                 if (scale > 5000000) {
                     style = style_roads_5000000_40000000;
                 } else if (scale > 2500000) {
@@ -69,7 +69,7 @@ var createLayers = function() {
                 } else {
                     style = style_roads_0_2500;
                 }
-                    
+
                 // try to detect the style
                 if (style.style[type]) {
                     return buildRoadStyle(feature, resolution, style);
@@ -78,7 +78,7 @@ var createLayers = function() {
             attributions: [attribution]
         })
     });
-    
+
     this.buildings = new ol.layer.Image({
         name: 'buildings',
         minResolution: 0,
@@ -90,14 +90,14 @@ var createLayers = function() {
                     defaultProjection: 'EPSG:3857'
                 }),
                 projection: 'EPSG:3857',
-                tileGrid: new ol.tilegrid.XYZ({
+                tileGrid: new ol.tilegrid.createXYZ({
                     minZoom: 0,
                     maxZoom: 19
                 }),
                 url: 'http://ows.terrestris.de/vectortiles/osm-buildings/{z}/{x}/{y}.topojson'
             }),
             style: (function() {
-                
+
                 return function(feature, resolution) {
                     var text = feature.get('name');
                     return [new ol.style.Style({
@@ -113,7 +113,7 @@ var createLayers = function() {
             attributions: [attribution]
         })
     });
-    
+
     this.waterways = new ol.layer.Image({
         name: 'waterways',
         minResolution: 0,
@@ -125,7 +125,7 @@ var createLayers = function() {
                     defaultProjection: 'EPSG:3857'
                 }),
                 projection: 'EPSG:3857',
-                tileGrid: new ol.tilegrid.XYZ({
+                tileGrid: new ol.tilegrid.createXYZ({
                     minZoom: 0,
                     maxZoom: 19
                 }),
@@ -158,7 +158,7 @@ var createLayers = function() {
                     defaultProjection: 'EPSG:3857'
                 }),
                 projection: 'EPSG:3857',
-                tileGrid: new ol.tilegrid.XYZ({
+                tileGrid: new ol.tilegrid.createXYZ({
                     minZoom: 0,
                     maxZoom: 19
                 }),
@@ -191,17 +191,17 @@ var createLayers = function() {
                     defaultProjection: 'EPSG:3857'
                 }),
                 projection: 'EPSG:3857',
-                tileGrid: new ol.tilegrid.XYZ({
+                tileGrid: new ol.tilegrid.createXYZ({
                     minZoom: 0,
                     maxZoom: 19
                 }),
                 url: 'http://ows.terrestris.de/vectortiles/osm-landusage/{z}/{x}/{y}.topojson'
             }),
             style: function(feature, resolution) {
-                
+
                 var props = feature.getProperties(),
                 type = props.type || null;
-                
+
                 // try to detect the style
                 if (style_landusage.style[type]) {
                     return buildLanduseStyle(feature, type, resolution, style_landusage);
@@ -210,7 +210,7 @@ var createLayers = function() {
             attributions: [attribution]
         })
     });
-    
+
     this.places = new ol.layer.Image({
         name: 'places',
         source: new ol.source.ImageVector({
@@ -220,19 +220,19 @@ var createLayers = function() {
                     defaultProjection: 'EPSG:3857'
                 }),
                 projection: 'EPSG:3857',
-                tileGrid: new ol.tilegrid.XYZ({
+                tileGrid: new ol.tilegrid.createXYZ({
                     minZoom: 0,
                     maxZoom: 19
                 }),
                 url: 'http://ows.terrestris.de/vectortiles/osm-places/{z}/{x}/{y}.topojson'
             }),
             style: (function() {
-                
+
                 return function(feature, resolution) {
                     var text = feature.get('name'),
                         type = feature.get('type'),
                         font = 'px Calibri,sans-serif';
-                    
+
                     if (type === 'country') {
                         font = 16 + font;
                     } else if (type === 'city') {
@@ -242,7 +242,7 @@ var createLayers = function() {
                     } else if (type === 'village') {
                         font = 10 + font;
                     }
-                    
+
                     return [new ol.style.Style({
                         text: new ol.style.Text({
                             font: font,
@@ -262,7 +262,7 @@ var createLayers = function() {
             attributions: [attribution]
         })
     });
-    
+
     layers.push(landusage,waterareas,waterways,buildings,roads,places,osmwms);
     return layers;
 };
@@ -288,10 +288,10 @@ var createInteractions = function(layers) {
         layers: olLayersToHover
     });
     actions.push(selectMouseMove);
-    
+
     return actions;
 };
-  
+
 /**
  * Create the OL map with the given layers and interactions
  */
@@ -315,7 +315,7 @@ var createMap = function(layers,actions) {
         loadTilesWhileAnimating: true,
         interactions: ol.interaction.defaults().extend(actions)
     });
-    
+
     return map;
 };
 
@@ -329,32 +329,32 @@ var registerListeners = function(map) {
         updateStatistics(buildings);
         updateStatistics(landusage);
     });
-    
-    var osmwmsvisibility = new ol.dom.Input(document.getElementById('osmwmsvisibility'));
-    osmwmsvisibility.bindTo('checked', osmwms, 'visible');
-    
-    var roadsvisibility = new ol.dom.Input(document.getElementById('roadsvisibility'));
-    roadsvisibility.bindTo('checked', roads, 'visible');
 
-    var landusagevisibility = new ol.dom.Input(document.getElementById('landusagevisibility'));
-    landusagevisibility.bindTo('checked', landusage, 'visible');
+    var osmwmsvisibility = document.getElementById('osmwmsvisibility');
+    osmwmsvisibility.addEventListener('change', function(){osmwms.setVisible(!osmwms.getVisible())});
 
-    var buildingsvisibility = new ol.dom.Input(document.getElementById('buildingsvisibility'));
-    buildingsvisibility.bindTo('checked', buildings, 'visible');
+    var roadsvisibility = document.getElementById('roadsvisibility');
+    roadsvisibility.addEventListener('change', function(){roads.setVisible(!roads.getVisible())});
 
-    var waterwaysvisibility = new ol.dom.Input(document.getElementById('waterwaysvisibility'));
-    waterwaysvisibility.bindTo('checked', waterways, 'visible');
+    var landusagevisibility = document.getElementById('landusagevisibility');
+    landusagevisibility.addEventListener('change', function(){landusage.setVisible(!landusage.getVisible())});
 
-    var waterareasvisibility = new ol.dom.Input(document.getElementById('waterareasvisibility'));
-    waterareasvisibility.bindTo('checked', waterareas, 'visible');
+    var buildingsvisibility = document.getElementById('buildingsvisibility');
+    buildingsvisibility.addEventListener('change', function(){buildings.setVisible(!buildings.getVisible())});
 
-    var placesvisibility = new ol.dom.Input(document.getElementById('placesvisibility'));
-    placesvisibility.bindTo('checked', places, 'visible');
+    var waterwaysvisibility = document.getElementById('waterwaysvisibility');
+    waterwaysvisibility.addEventListener('change', function(){waterways.setVisible(!waterways.getVisible())});
+
+    var waterareasvisibility = document.getElementById('waterareasvisibility');
+    waterareasvisibility.addEventListener('change', function(){waterareas.setVisible(!waterareas.getVisible())});
+
+    var placesvisibility = document.getElementById('placesvisibility');
+    placesvisibility.addEventListener('change', function(){places.setVisible(!places.getVisible())});
 
     var grayScaleBox = document.getElementById('rendergrayscale'),
         graylistener;
-        
-    grayScaleBox.onchange = function(evt) {
+
+    grayScaleBox.addEventListener('change', function(evt) {
         if (grayScaleBox.checked) {
             if (!goog.isDef(graylistener)) {
                 graylistener = roads.on('postcompose', function(evt) {
@@ -367,11 +367,11 @@ var registerListeners = function(map) {
             map.render();
             graylistener = undefined;
         }
-    };
-    
+    });
+
     var styleFeaturesBox = document.getElementById('stylefeatures'),
         styler = document.getElementById('stylecontainer');
-    
+
     styleFeaturesBox.onchange = function(evt) {
         if (styleFeaturesBox.checked) {
             if ($('.minicolors-input').length === 0) {
@@ -394,16 +394,16 @@ var registerListeners = function(map) {
  * Method handles the styling of features after a color has been selected
  */
 var handleFeatureSelection = function(hex) {
-    
+
     var selectCtrl = map.getInteractions().getArray().
         filter(function(i){return i instanceof ol.interaction.Select;})[0],
         selectedFeature = selectCtrl.getFeatures().getArray()[0];
-    
+
     if (selectedFeature) {
         var type = selectedFeature.get('type'),
             lArr = map.getLayers().getArray()[0].getLayers(),
             layer;
-        
+
         // determine the layer
         lArr.forEach(function(l) {
             if (l instanceof ol.layer.Image && l.getVisible()) {
@@ -416,7 +416,7 @@ var handleFeatureSelection = function(hex) {
                 }
             }
         });
-        
+
         if (layer === buildings) {
             layer.getSource().setStyle([new ol.style.Style({
                 fill: new ol.style.Fill({
@@ -439,12 +439,12 @@ var handleFeatureSelection = function(hex) {
             style_roads_35000_100000.style[type].colors.pop();
             style_roads_35000_100000.style[type].colors.push(hex);
         }
-        
+
         layer.getSource().changed();
     }
 };
-    
-    
+
+
 /**
  * getScale helper
  */
@@ -467,7 +467,7 @@ var renderGrayScale = function(context) {
     var mapdiv = document.getElementById('map'),
         imageData = context.getImageData(0, 0, mapdiv.clientWidth, mapdiv.clientHeight),
         data = imageData.data;
-    
+
     for(var i = 0; i < data.length; i += 4) {
       var brightness = 0.34 * data[i] + 0.5 * data[i + 1] + 0.16 * data[i + 2];
       data[i] = brightness;
@@ -486,7 +486,7 @@ var buildRoadStyle = function(feature, resolution, styleObject) {
     var props = feature.getProperties(),
         type = props.type || null,
         text = props.name || null;
-    
+
     var styleArray = [],
         below = new ol.style.Style({
             stroke: new ol.style.Stroke({
@@ -498,9 +498,9 @@ var buildRoadStyle = function(feature, resolution, styleObject) {
             }),
             zIndex: feature.get('z_order') || 0
         });
-    
+
     styleArray.push(below);
-    
+
     // check if we need a "outline" for this road
     if (styleObject.style[type].widths.length > 1) {
         var above = new ol.style.Style({
@@ -514,17 +514,17 @@ var buildRoadStyle = function(feature, resolution, styleObject) {
         });
         styleArray.push(above);
     }
-    
+
     // check if we can label this road
     if (getCurrentScale() < 100000 &&
         text &&
-        text.length > 0 && 
+        text.length > 0 &&
         feature instanceof ol.Feature &&
         feature.get('geometry') &&
         feature.get('geometry') instanceof ol.geom.LineString &&
         feature.get('geometry').getLength() &&
         (feature.get('geometry').getLength() / resolution) / text.length > labelThreshold) {
-        
+
             var coords = feature.get('geometry').getCoordinates(),
                 offsetX = 0,
                 offsetY = 0,
@@ -533,13 +533,13 @@ var buildRoadStyle = function(feature, resolution, styleObject) {
             // first we check if the linestring contains multiple segments
             // as in this case we will render the textlabel on the longest segment
             if (coords.length > 1) {
-                
+
                 for (var i = 0; i < coords.length - 1; i++) {
                     // get the length for each segment
                     var segment = new ol.Feature({
                         geometry: new ol.geom.LineString([[coords[i][0], coords[i][1]],[coords[i+1][0], coords[i+1][1]]])
                     });
-                    
+
                     if (longestSegment instanceof ol.Feature) {
                         if (longestSegment.getGeometry().getLength() < segment.getGeometry().getLength()) {
                             longestSegment = segment;
@@ -552,21 +552,21 @@ var buildRoadStyle = function(feature, resolution, styleObject) {
                 if (!(longestSegment.get('geometry').getLength() / resolution > labelThreshold)) {
                     return styleArray;
                 }
-                
+
                 longestSegment.set('z_order', feature.get('z_order'));
-                
+
                 var origLabelCenter = map.getPixelFromCoordinate(feature.getGeometry().getFlatMidpoint()),
                     newLabelCenter =  map.getPixelFromCoordinate(longestSegment.getGeometry().getFlatMidpoint());
-                    
+
                 offsetX = -1*(origLabelCenter[0]-newLabelCenter[0]);
                 offsetY = -1*(origLabelCenter[1]-newLabelCenter[1]);
-                
+
                 feature = longestSegment;
-                
+
             }
-            
+
             // at this stage we should have a linestring with just an start and endpoint
-            
+
             coords = feature.get('geometry').getCoordinates();
             var start = coords[0],
                 end = coords[coords.length-1],
@@ -574,8 +574,8 @@ var buildRoadStyle = function(feature, resolution, styleObject) {
                 x = end[0] - start[0],
                 angle = Math.atan2(x,y),
                 degrees = 360-(angle*180/Math.PI)-90;
-            
-            
+
+
             // avoid bad values for radians
             if (degrees > 360) {
                 degrees = 360 - degrees;
@@ -590,7 +590,7 @@ var buildRoadStyle = function(feature, resolution, styleObject) {
                 }
             }
             var radians = degrees * (Math.PI/180);
-            
+
             var textStroke = new ol.style.Stroke({
                 color: '#fff',
                 width: 3
@@ -624,7 +624,7 @@ var buildLanduseStyle = function(feature, type, resolution, styleObject) {
             color: styleObject.style[type].colors[0] || 'blue',
             opacity: styleObject.style[type].opacity || 1
         }),
-        zIndex: styleObject.style[type].zIndex || (feature.get('z_order') || 3) 
+        zIndex: styleObject.style[type].zIndex || (feature.get('z_order') || 3)
         // why 3? -> because we render park and wood on 1 and 2...
         // this is some 'fix' for handling weired or undefined z_order in osm data
     })];
@@ -634,7 +634,7 @@ var buildLanduseStyle = function(feature, type, resolution, styleObject) {
  * Updates the statistic values of loaded and visible features
  */
 var updateStatistics = function(layer) {
-    
+
     var allFeatures = layer.getSource().getSource().getFeatures(),
         mapExtent = map.getView().calculateExtent(map.getSize()),
         layerVisible = layer.getVisible(),
@@ -652,7 +652,7 @@ var updateStatistics = function(layer) {
             currentLength = g.getCoordinates().length;
         }
         pointsPairCount = pointsPairCount + currentLength;
-        
+
         if (g.intersectsExtent(mapExtent)) {
             if (layer.getMaxResolution() > map.getView().getResolution()) {
                 // layer in render range, increment visible values) {
@@ -664,20 +664,20 @@ var updateStatistics = function(layer) {
             }
         }
     }
-    
+
     var coordpairs = document.getElementsByName("coordinatepairs" + layer.get('name'))[0],
         vectors = document.getElementsByName("vectors" + layer.get('name'))[0],
         coordpairsvisible = document.getElementsByName("coordinatepairs" + layer.get('name') + "visible")[0],
         vectorsvisible = document.getElementsByName("vectors" + layer.get('name') + "visible")[0];
-    
+
     coordpairs.innerHTML = pointsPairCount + " Coords";
     vectors.innerHTML = featureCount + " Features";
-    
+
     coordpairsvisible.innerHTML = visiblePointsPairCount + " Coords";
     vectorsvisible.innerHTML = visibleFeatureCount + " Features";
-    
+
     allFeatures = null;
-    
+
 };
 
 /**
