@@ -8,6 +8,8 @@
  */
 var labelThreshold = 8;
 
+var labelExtentArray = [];
+
 /**
  * Create layers for the OL map
  */
@@ -28,242 +30,235 @@ var createLayers = function() {
         }))
     });
 
-    this.roads = new ol.layer.Image({
+    this.roads = new ol.layer.VectorTile({
         name: 'roads',
-        source: new ol.source.ImageVector({
-            updateVectorsWhileAnimating: true,
-            ratio: 1,
-            source: new ol.source.TileVector({
-                format: new ol.format.TopoJSON({
-                    defaultProjection: 'EPSG:3857'
-                }),
-                projection: 'EPSG:3857',
-                tileGrid: new ol.tilegrid.createXYZ({
-                    minZoom: 0,
-                    maxZoom: 19
-                }),
-                url: 'http://ows.terrestris.de/vectortiles/osm-roads/{z}/{x}/{y}.topojson'
-            }),
-            style: function(feature, resolution) {
-                var props = feature.getProperties(),
-                    type = props.type || null,
-                    style,
-                    scale = getCurrentScale();
+        renderMode: 'image',
+        source: new ol.source.VectorTile({
+          format: new ol.format.TopoJSON({
+              defaultProjection: 'EPSG:3857'
+          }),
+          projection: 'EPSG:3857',
+          tileGrid: new ol.tilegrid.createXYZ({
+              minZoom: 0,
+              maxZoom: 19
+          }),
+          url: 'http://ows.terrestris.de/vectortiles/osm-roads/{z}/{x}/{y}.topojson'
+        }),
+        style: function(feature, resolution) {
+            var props = feature.getProperties(),
+                type = props.type || null,
+                style,
+                scale = getCurrentScale();
 
-                if (scale > 5000000) {
-                    style = style_roads_5000000_40000000;
-                } else if (scale > 2500000) {
-                    style = style_roads_2500000_5000000;
-                } else if (scale > 1000000) {
-                    style = style_roads_1000000_2500000;
-                } else if (scale > 250000) {
-                    style = style_roads_250000_1000000;
-                } else if (scale > 100000) {
-                    style = style_roads_100000_250000;
-                } else if (scale > 35000) {
-                    style = style_roads_35000_100000;
-                } else if (scale > 15000) {
-                    style = style_roads_15000_35000;
-                } else if (scale > 2500) {
-                    style = style_roads_2500_15000;
-                } else {
-                    style = style_roads_0_2500;
-                }
+            if (scale > 5000000) {
+                style = style_roads_5000000_40000000;
+            } else if (scale > 2500000) {
+                style = style_roads_2500000_5000000;
+            } else if (scale > 1000000) {
+                style = style_roads_1000000_2500000;
+            } else if (scale > 250000) {
+                style = style_roads_250000_1000000;
+            } else if (scale > 100000) {
+                style = style_roads_100000_250000;
+            } else if (scale > 35000) {
+                style = style_roads_35000_100000;
+            } else if (scale > 15000) {
+                style = style_roads_15000_35000;
+            } else if (scale > 2500) {
+                style = style_roads_2500_15000;
+            } else {
+                style = style_roads_0_2500;
+            }
 
-                // try to detect the style
-                if (style.style[type]) {
-                    return buildRoadStyle(feature, resolution, style);
-                }
-            },
-            attributions: [attribution]
-        })
+            // try to detect the style
+            if (style.style[type]) {
+                return buildRoadStyle(feature, resolution, style);
+            }
+        },
+        attributions: [attribution]
     });
 
-    this.buildings = new ol.layer.Image({
+    this.buildings = new ol.layer.VectorTile({
         name: 'buildings',
+        renderMode: 'image',
         minResolution: 0,
         maxResolution: 2.388657133911758, // ~ 1:8530, level 16
-        source: new ol.source.ImageVector({
-            ratio: 1,
-            source: new ol.source.TileVector({
-                format: new ol.format.TopoJSON({
-                    defaultProjection: 'EPSG:3857'
-                }),
-                projection: 'EPSG:3857',
-                tileGrid: new ol.tilegrid.createXYZ({
-                    minZoom: 0,
-                    maxZoom: 19
-                }),
-                url: 'http://ows.terrestris.de/vectortiles/osm-buildings/{z}/{x}/{y}.topojson'
+        source: new ol.source.VectorTile({
+            format: new ol.format.TopoJSON({
+                defaultProjection: 'EPSG:3857'
             }),
-            style: (function() {
+            projection: 'EPSG:3857',
+            tileGrid: new ol.tilegrid.createXYZ({
+                minZoom: 0,
+                maxZoom: 19
+            }),
+            url: 'http://ows.terrestris.de/vectortiles/osm-buildings/{z}/{x}/{y}.topojson'
+        }),
+        style: (function() {
 
-                return function(feature, resolution) {
-                    var text = feature.get('name');
-                    return [new ol.style.Style({
-                        fill: new ol.style.Fill({
-                          color: '#D1D1D1'
-                        }),
-                        stroke: new ol.style.Stroke({
-                          color: '#B3B3B3'
-                        })
-                    })];
-                };
-            })(),
-            attributions: [attribution]
-        })
+            return function(feature, resolution) {
+                var text = feature.get('name');
+                return [new ol.style.Style({
+                    fill: new ol.style.Fill({
+                      color: '#D1D1D1'
+                    }),
+                    stroke: new ol.style.Stroke({
+                      color: '#B3B3B3'
+                    })
+                })];
+            };
+        })(),
+        attributions: [attribution]
     });
 
-    this.waterways = new ol.layer.Image({
+    this.waterways = new ol.layer.VectorTile({
         name: 'waterways',
+        renderMode: 'image',
         minResolution: 0,
         maxResolution: 152.8740565703525, // ~ 1:545977, level 10
-        source: new ol.source.ImageVector({
-            ratio: 1,
-            source: new ol.source.TileVector({
-                format: new ol.format.TopoJSON({
-                    defaultProjection: 'EPSG:3857'
-                }),
-                projection: 'EPSG:3857',
-                tileGrid: new ol.tilegrid.createXYZ({
-                    minZoom: 0,
-                    maxZoom: 19
-                }),
-                url: 'http://ows.terrestris.de/vectortiles/osm-waterways/{z}/{x}/{y}.topojson'
+        source: new ol.source.VectorTile({
+            format: new ol.format.TopoJSON({
+                defaultProjection: 'EPSG:3857'
             }),
-            style: (function() {
-                return function(feature, resolution) {
-                    return [new ol.style.Style({
-                      fill: new ol.style.Fill({
-                        color: '#99B3CC'
-                      }),
-                      stroke: new ol.style.Stroke({
-                        color: '#99B3CC'
-                      })
-                    })];
-                };
-            })(),
-            attributions: [attribution]
-        })
+            projection: 'EPSG:3857',
+            tileGrid: new ol.tilegrid.createXYZ({
+                minZoom: 0,
+                maxZoom: 19
+            }),
+            url: 'http://ows.terrestris.de/vectortiles/osm-waterways/{z}/{x}/{y}.topojson'
+        }),
+        style: (function() {
+            return function(feature, resolution) {
+                return [new ol.style.Style({
+                  fill: new ol.style.Fill({
+                    color: '#99B3CC'
+                  }),
+                  stroke: new ol.style.Stroke({
+                    color: '#99B3CC'
+                  })
+                })];
+            };
+        })(),
+        attributions: [attribution]
     });
 
-    this.waterareas = new ol.layer.Image({
+    this.waterareas = new ol.layer.VectorTile({
         name: 'waterareas',
+        renderMode: 'image',
         minResolution: 0,
         maxResolution: 305.748113140705, // ~ 1:1091955, level 9
-        source: new ol.source.ImageVector({
-            ratio: 1,
-            source: new ol.source.TileVector({
-                format: new ol.format.TopoJSON({
-                    defaultProjection: 'EPSG:3857'
-                }),
-                projection: 'EPSG:3857',
-                tileGrid: new ol.tilegrid.createXYZ({
-                    minZoom: 0,
-                    maxZoom: 19
-                }),
-                url: 'http://ows.terrestris.de/vectortiles/osm-waterareas/{z}/{x}/{y}.topojson'
+        source: new ol.source.VectorTile({
+            format: new ol.format.TopoJSON({
+                defaultProjection: 'EPSG:3857'
             }),
-            style: (function() {
-                return function(feature, resolution) {
-                    return [new ol.style.Style({
-                      fill: new ol.style.Fill({
-                        color: '#99B3CC'
-                      }),
-                      stroke: new ol.style.Stroke({
-                          color: '#99B3CC'
-                      })
-                    })];
-                };
-            })(),
-            attributions: [attribution]
-        })
+            projection: 'EPSG:3857',
+            tileGrid: new ol.tilegrid.createXYZ({
+                minZoom: 0,
+                maxZoom: 19
+            }),
+            url: 'http://ows.terrestris.de/vectortiles/osm-waterareas/{z}/{x}/{y}.topojson'
+        }),
+        style: (function() {
+            return function(feature, resolution) {
+                return [new ol.style.Style({
+                  fill: new ol.style.Fill({
+                    color: '#99B3CC'
+                  }),
+                  stroke: new ol.style.Stroke({
+                      color: '#99B3CC'
+                  })
+                })];
+            };
+        })(),
+        attributions: [attribution]
     });
 
-    this.landusage = new ol.layer.Image({
+    this.landusage = new ol.layer.VectorTile({
         name: 'landusage',
+        renderMode: 'image',
         minResolution: 0,
         maxResolution: 152.8740565703525, // ~ 1:545977, level 10
-        source: new ol.source.ImageVector({
-            ratio: 1,
-            source: new ol.source.TileVector({
-                format: new ol.format.TopoJSON({
-                    defaultProjection: 'EPSG:3857'
-                }),
-                projection: 'EPSG:3857',
-                tileGrid: new ol.tilegrid.createXYZ({
-                    minZoom: 0,
-                    maxZoom: 19
-                }),
-                url: 'http://ows.terrestris.de/vectortiles/osm-landusage/{z}/{x}/{y}.topojson'
+        source: new ol.source.VectorTile({
+            format: new ol.format.TopoJSON({
+                defaultProjection: 'EPSG:3857'
             }),
-            style: function(feature, resolution) {
+            projection: 'EPSG:3857',
+            tileGrid: new ol.tilegrid.createXYZ({
+                minZoom: 0,
+                maxZoom: 19
+            }),
+            url: 'http://ows.terrestris.de/vectortiles/osm-landusage/{z}/{x}/{y}.topojson'
+        }),
+        style: function(feature, resolution) {
 
-                var props = feature.getProperties(),
-                type = props.type || null;
+            var props = feature.getProperties(),
+            type = props.type || null;
 
-                // try to detect the style
-                if (style_landusage.style[type]) {
-                    return buildLanduseStyle(feature, type, resolution, style_landusage);
-                }
-            },
-            attributions: [attribution]
-        })
+            // try to detect the style
+            if (style_landusage.style[type]) {
+                return buildLanduseStyle(feature, type, resolution, style_landusage);
+            }
+        },
+        attributions: [attribution]
     });
 
-    this.places = new ol.layer.Image({
+    this.places = new ol.layer.VectorTile({
         name: 'places',
-        source: new ol.source.ImageVector({
-            ratio: 1,
-            source: new ol.source.TileVector({
-                format: new ol.format.TopoJSON({
-                    defaultProjection: 'EPSG:3857'
-                }),
-                projection: 'EPSG:3857',
-                tileGrid: new ol.tilegrid.createXYZ({
-                    minZoom: 0,
-                    maxZoom: 19
-                }),
-                url: 'http://ows.terrestris.de/vectortiles/osm-places/{z}/{x}/{y}.topojson'
+        renderMode: 'hybrid',
+        source: new ol.source.VectorTile({
+            format: new ol.format.TopoJSON({
+                defaultProjection: 'EPSG:3857'
             }),
-            style: (function() {
+            projection: 'EPSG:3857',
+            tileGrid: new ol.tilegrid.createXYZ({
+                minZoom: 0,
+                maxZoom: 19,
+                tileSize: [1024,1024]
+            }),
+            url: 'http://ows.terrestris.de/vectortiles/osm-places/{z}/{x}/{y}.topojson'
+        }),
+        style: (function() {
 
-                return function(feature, resolution) {
-                    var text = feature.get('name'),
-                        type = feature.get('type'),
-                        font = 'px Calibri,sans-serif';
+            return function(feature, resolution) {
+                var text = feature.get('name'),
+                    type = feature.get('type'),
+                    font = 'px Calibri,sans-serif';
 
-                    if (type === 'country') {
-                        font = 16 + font;
-                    } else if (type === 'city') {
-                        font = 14 + font;
-                    } else if (type === 'town') {
-                        font = 12 + font;
-                    } else if (type === 'village') {
-                        font = 10 + font;
-                    }
+                if (type === 'country') {
+                    font = 16 + font;
+                } else if (type === 'city') {
+                    font = 14 + font;
+                } else if (type === 'town') {
+                    font = 12 + font;
+                } else if (type === 'village') {
+                    font = 10 + font;
+                }
 
-                    return [new ol.style.Style({
-                        text: new ol.style.Text({
-                            font: font,
-                            text: text,
-                            fill: new ol.style.Fill({
-                                color: '#000',
-                                width: 3
-                            }),
-                            stroke: new ol.style.Stroke({
-                                color: '#fff',
-                                width: 5
-                            })
+                return [new ol.style.Style({
+                    text: new ol.style.Text({
+                        font: font,
+                        text: text,
+                        fill: new ol.style.Fill({
+                            color: '#000',
+                            width: 3
+                        }),
+                        stroke: new ol.style.Stroke({
+                            color: '#fff',
+                            width: 5
                         })
-                    })];
-                };
-            })(),
-            attributions: [attribution]
-        })
+                    }),
+                    zIndex: 999
+                })];
+            };
+        })(),
+        attributions: [attribution]
     });
 
-    layers.push(landusage,waterareas,waterways,buildings,roads,places,osmwms);
+    this.bboxLayer = new ol.layer.Vector({
+      source: new ol.source.Vector()
+    });
+
+    layers.push(landusage,waterareas,waterways,buildings,roads,places,osmwms,bboxLayer);
     return layers;
 };
 
@@ -288,6 +283,7 @@ var createInteractions = function(layers) {
         layers: olLayersToHover
     });
     actions.push(selectMouseMove);
+    actions.push(new ol.interaction.DragRotateAndZoom());
 
     return actions;
 };
@@ -303,8 +299,8 @@ var createMap = function(layers,actions) {
         })],
         target: 'map',
         view: new ol.View({
-            center: [847316.1308811717, 6793531.649854118],
-            zoom: 16
+            center: [787626.7056701413, 6575033.897645277],
+            zoom: 18
         }),
         controls: ol.control.defaults({
             attributionOptions: ({
@@ -324,11 +320,14 @@ var createMap = function(layers,actions) {
  */
 var registerListeners = function(map) {
 
-    map.on('moveend', function() {
-        updateStatistics(roads);
-        updateStatistics(buildings);
-        updateStatistics(landusage);
-    });
+    map.getView().on('change:resolution', function() {
+      // debugger;
+      this.bboxLayer.getSource().clear();
+      labelExtentArray= [];
+        //updateStatistics(roads);
+        //updateStatistics(buildings);
+        //updateStatistics(landusage);
+    }, this);
 
     var osmwmsvisibility = document.getElementById('osmwmsvisibility');
     osmwmsvisibility.addEventListener('change', function(){osmwms.setVisible(!osmwms.getVisible())});
@@ -487,6 +486,10 @@ var buildRoadStyle = function(feature, resolution, styleObject) {
         type = props.type || null,
         text = props.name || null;
 
+    if (!text) {
+      return;
+    }
+
     var styleArray = [],
         below = new ol.style.Style({
             stroke: new ol.style.Stroke({
@@ -566,51 +569,97 @@ var buildRoadStyle = function(feature, resolution, styleObject) {
             }
 
             // at this stage we should have a linestring with just an start and endpoint
+            var extent = feature.get('geometry').getExtent();
 
-            coords = feature.get('geometry').getCoordinates();
-            var start = coords[0],
-                end = coords[coords.length-1],
-                y = end[1] - start[1],
-                x = end[0] - start[0],
-                angle = Math.atan2(x,y),
-                degrees = 360-(angle*180/Math.PI)-90;
+            var labelThis = true;
+            var labelCenter = feature.getGeometry().getFlatMidpoint();
+            var p = new ol.geom.Point(labelCenter);
+            var ff = new ol.Feature({geometry:p});
+            this.bboxLayer.getSource().addFeature(ff);//debugger;
 
+            labelExtentArray.forEach(function(labeledExtent) {
 
-            // avoid bad values for radians
-            if (degrees > 360) {
-                degrees = 360 - degrees;
-            }
-            // flipping degrees until we are only between -90 and 90 degrees
-            // for readability reasons
-            while (degrees > 90 || degrees < -90) {
-                if (degrees > 90) {
-                    degrees = 180 - degrees;
-                } else if (degrees < -90) {
-                    degrees = 180 + degrees;
+              //  console.log("labeled extent: " + labeledExtent);
+                if (feature.getGeometry().intersectsExtent(labeledExtent)) {
+                  console.log("collision detected, skipping! " + text, feature)
+                  var polygon = ol.geom.Polygon.fromExtent(extent);
+                  var f = new ol.Feature({geometry:polygon});
+                  var polygon2 = ol.geom.Polygon.fromExtent(labeledExtent);
+                  var f2 = new ol.Feature({geometry:polygon2});
+                  f.setStyle(new ol.style.Style({
+                      stroke: new ol.style.Stroke({
+                          color: 'blue',
+                      }),
+                  }));
+                  f2.setStyle(new ol.style.Style({
+                      stroke: new ol.style.Stroke({
+                          color: 'red',
+                      }),
+                  }));
+                  this.bboxLayer.getSource().addFeature(f);
+                  this.bboxLayer.getSource().addFeature(f2);
+                  // debugger;
+                //  labelThis = false;
+                //  return;
                 }
-            }
-            var radians = degrees * (Math.PI/180);
+            });
+            if (labelThis) {
+              labelExtentArray.push(extent);
+  // console.log(labelThis);
+              coords = feature.get('geometry').getCoordinates();
+              var start = coords[0],
+                  end = coords[coords.length-1],
+                  y = end[1] - start[1],
+                  x = end[0] - start[0],
+                  angle = Math.atan2(x,y),
+                  degrees = 360-(angle*180/Math.PI)-90;
 
-            var textStroke = new ol.style.Stroke({
-                color: '#fff',
-                width: 3
-            });
-            var textFill = new ol.style.Fill({
-                color: '#000'
-            });
-            var textStyle = new ol.style.Style({
-                text: new ol.style.Text({
-                    font: '11px Calibri,sans-serif',
-                    text: text,
-                    fill: textFill,
-                    rotation: radians,
-                    stroke: textStroke,
-                    offsetX: offsetX,
-                    offsetY: offsetY
-                }),
-                zIndex: feature.get('z_order') + 999 || 999 // labels always on top :-)
-            });
-            styleArray.push(textStyle);
+
+              // avoid bad values for radians
+              if (degrees > 360) {
+                  degrees = 360 - degrees;
+              }
+              // flipping degrees until we are only between -90 and 90 degrees
+              // for readability reasons
+              while (degrees > 90 || degrees < -90) {
+                  if (degrees > 90) {
+                      degrees = 180 - degrees;
+                  } else if (degrees < -90) {
+                      degrees = 180 + degrees;
+                  }
+              }
+              var radians = degrees * (Math.PI/180);
+
+              var textStroke = new ol.style.Stroke({
+                  color: '#fff',
+                  width: 3
+              });
+              var textFill = new ol.style.Fill({
+                  color: '#000'
+              });
+              var textStyle = new ol.style.Style({
+                  text: new ol.style.Text({
+                      font: '11px Calibri,sans-serif',
+                      text: text,
+                      fill: textFill,
+                      rotation: radians,
+                      stroke: textStroke,
+                      offsetX: offsetX,
+                      offsetY: offsetY
+                  }),
+                  zIndex: feature.get('z_order') + 999 || 999 // labels always on top :-)
+              });
+              styleArray.push(textStyle);
+              var factor = text.length * map.getView().getResolution() * 2;
+              var x1 = labelCenter[0] + (factor * Math.sin(radians));
+              var y1 = labelCenter[1] + (factor * Math.cos(radians));
+              var x2 = x1 - factor * 2 * Math.sin(radians);
+              var y2 = y1 - factor * 2 * Math.cos(radians)
+// debugger;
+              var l = new ol.geom.LineString([[x1,y1],[x2,y2]]);
+              var fl = new ol.Feature({geometry:l});
+              this.bboxLayer.getSource().addFeature(fl);//debugger;
+            }
     }
     return styleArray;
 };
@@ -634,7 +683,7 @@ var buildLanduseStyle = function(feature, type, resolution, styleObject) {
  * Updates the statistic values of loaded and visible features
  */
 var updateStatistics = function(layer) {
-
+/*
     var allFeatures = layer.getSource().getSource().getFeatures(),
         mapExtent = map.getView().calculateExtent(map.getSize()),
         layerVisible = layer.getVisible(),
@@ -677,7 +726,7 @@ var updateStatistics = function(layer) {
     vectorsvisible.innerHTML = visibleFeatureCount + " Features";
 
     allFeatures = null;
-
+*/
 };
 
 /**
