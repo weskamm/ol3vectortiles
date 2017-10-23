@@ -1,6 +1,6 @@
 // OpenLayers. See https://openlayers.org/
 // License: https://raw.githubusercontent.com/openlayers/openlayers/master/LICENSE.md
-// Version: v4.4.2-85-g46971ac
+// Version: v4.4.2-86-g59ed0a4
 ;(function (root, factory) {
   if (typeof exports === "object") {
     module.exports = factory();
@@ -27102,8 +27102,15 @@ ol.render.canvas.Replay.prototype.renderDeclutter_ = function(declutterGroup) {
   if (declutterGroup && declutterGroup.length > 5) {
     var groupCount = declutterGroup[4];
     if (groupCount == 1 || groupCount == declutterGroup.length - 5) {
-      if (!this.declutterTree.collides(this.declutterTree.toBBox(declutterGroup))) {
-        this.declutterTree.insert(declutterGroup.slice(0, 4));
+      /** @type {ol.RBushEntry} */
+      var box = {
+        minX: /** @type {number} */ (declutterGroup[0]),
+        minY: /** @type {number} */ (declutterGroup[1]),
+        maxX: /** @type {number} */ (declutterGroup[2]),
+        maxY: /** @type {number} */ (declutterGroup[3])
+      };
+      if (!this.declutterTree.collides(box)) {
+        this.declutterTree.insert(box);
         var drawImage = ol.render.canvas.drawImage;
         for (var j = 5, jj = declutterGroup.length; j < jj; ++j) {
           if (declutterGroup[j]) {
@@ -30628,7 +30635,7 @@ ol.renderer.canvas.VectorTileLayer = function(layer) {
    * Declutter tree.
    * @private
      */
-  this.declutterTree_ = layer.getDeclutter() ? ol.ext.rbush(9, ['[0]', '[1]', '[2]', '[3]']) : null;
+  this.declutterTree_ = layer.getDeclutter() ? ol.ext.rbush(9) : null;
 
   /**
    * @private
@@ -72195,7 +72202,7 @@ ol.source.ImageVector = function(options) {
    * Declutter tree.
    * @private
    */
-  this.declutterTree_ = ol.ext.rbush(9, ['[0]', '[1]', '[2]', '[3]']);
+  this.declutterTree_ = ol.ext.rbush(9);
 
   /**
    * @private
@@ -95351,7 +95358,7 @@ goog.exportProperty(
     ol.control.ZoomToExtent.prototype,
     'un',
     ol.control.ZoomToExtent.prototype.un);
-ol.VERSION = 'v4.4.2-85-g46971ac';
+ol.VERSION = 'v4.4.2-86-g59ed0a4';
 OPENLAYERS.ol = ol;
 
   return OPENLAYERS.ol;
