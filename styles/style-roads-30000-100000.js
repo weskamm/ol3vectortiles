@@ -1,4 +1,4 @@
-var style_roads_35000_100000 = {
+var style_roads_30000_100000 = {
     "style": {
         "motorway (bridge)": {
             "colors": ["#888888", "#FD923A"],
@@ -38,7 +38,7 @@ var style_roads_35000_100000 = {
             "colors": ["#888888", "#FFFFFF"],
             "widths": [5, 3],
             "caps": ["round", "round"],
-            "opacity": 1, 
+            "opacity": 1,
             "geometryName": "geometry",
             "andFilters": {"bridge": 1}
         },
@@ -46,7 +46,7 @@ var style_roads_35000_100000 = {
             "colors": ["#888888", "#FFFFFF"],
             "widths": [5, 3],
             "caps": ["round", "round"],
-            "opacity": 1, 
+            "opacity": 1,
             "geometryName": "geometry",
             "andFilters": {"bridge": 1}
         },
@@ -54,7 +54,7 @@ var style_roads_35000_100000 = {
             "colors": ["#888888", "#FFFFFF"],
             "widths": [5, 3],
             "caps": ["round", "round"],
-            "opacity": 1, 
+            "opacity": 1,
             "geometryName": "geometry",
             "textStyle": {},
             "andFilters": {"bridge": 1}
@@ -63,7 +63,7 @@ var style_roads_35000_100000 = {
             "colors": ["#888888", "#FFFFFF"],
             "widths": [5, 3],
             "caps": ["round", "round"],
-            "opacity": 1, 
+            "opacity": 1,
             "geometryName": "geometry",
             "textStyle": {},
             "andFilters": {"bridge": 1}
@@ -72,7 +72,7 @@ var style_roads_35000_100000 = {
             "colors": ["#888888", "#FFFFFF"],
             "widths": [5, 3],
             "caps": ["round", "round"],
-            "opacity": 1, 
+            "opacity": 1,
             "geometryName": "geometry",
             "andFilters": {"bridge": 1}
         },
@@ -80,7 +80,7 @@ var style_roads_35000_100000 = {
             "colors": ["#888888", "#FFFFFF"],
             "widths": [5, 3],
             "caps": ["round", "round"],
-            "opacity": 1, 
+            "opacity": 1,
             "geometryName": "geometry",
             "andFilters": {"bridge": 1}
         },
@@ -88,7 +88,7 @@ var style_roads_35000_100000 = {
             "colors": ["#888888", "#FAFAF5"],
             "widths": [4.5, 2.5],
             "caps": ["round", "round"],
-            "opacity": 1, 
+            "opacity": 1,
             "geometryName": "geometry",
             "andFilters": {"bridge": 1}
         },
@@ -283,7 +283,7 @@ var style_roads_35000_100000 = {
             "colors": ["#888888", "#FFFFFF"],
             "widths": [4, 2],
             "caps": ["BUTT", "round"],
-            "opacity": 1, 
+            "opacity": 1,
             "geometryName": "geometry",
             "andFilters": {"bridge": 1}
         },
@@ -305,28 +305,28 @@ var style_roads_35000_100000 = {
             "colors": ["#C1B59D", "#FFFFFF"],
             "widths": [4, 2],
             "caps": ["round", "round"],
-            "opacity": 1, 
+            "opacity": 1,
             "geometryName": "geometry"
         },
         "road": {
             "colors": ["#C1B59D", "#FFFFFF"],
             "widths": [4, 2],
             "caps": ["round", "round"],
-            "opacity": 1, 
+            "opacity": 1,
             "geometryName": "geometry"
         },
         "living_street": {
             "colors": ["#C1B59D", "#FFFFFF"],
             "widths": [4, 2],
             "caps": ["round", "round"],
-            "opacity": 1, 
+            "opacity": 1,
             "geometryName": "geometry"
         },
         "pedestrian": {
             "colors": ["#C1B59D", "#FAFAF5"],
             "widths": [2.5, 0.75],
             "caps": ["round", "round"],
-            "opacity": 1, 
+            "opacity": 1,
             "geometryName": "geometry"
         },
         "track": {
@@ -334,7 +334,7 @@ var style_roads_35000_100000 = {
             "widths": [1],
             "caps": ["round"],
             "dasharray": "2.0 3.0",
-            "opacity": 1, 
+            "opacity": 1,
             "geometryName": "geometry"
         },
         "footway": {
@@ -342,7 +342,7 @@ var style_roads_35000_100000 = {
             "widths": [1],
             "caps": ["round"],
             "dasharray": "2.0 3.0",
-            "opacity": 1, 
+            "opacity": 1,
             "geometryName": "geometry"
         }
     }
