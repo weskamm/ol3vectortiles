@@ -1,4 +1,4 @@
-var style_roads_100000_250000 = {
+var style_roads_100000_150000 = {
     "style": {
         "motorway (bridge)": {
             "colors": ["#888888", "#FD923A"],
@@ -20,7 +20,7 @@ var style_roads_100000_250000 = {
             "colors": ["#888888", "#FFFFFF"],
             "widths": [5, 3],
             "caps": ["round", "round"],
-            "opacity": 1, 
+            "opacity": 1,
             "geometryName": "geometry",
             "andFilters": {"bridge": 1}
         },
@@ -28,7 +28,7 @@ var style_roads_100000_250000 = {
             "colors": ["#888888", "#FFFFFF"],
             "widths": [4, 2],
             "caps": ["round", "round"],
-            "opacity": 1, 
+            "opacity": 1,
             "geometryName": "geometry",
             "andFilters": {"bridge": 1}
         },
@@ -36,17 +36,9 @@ var style_roads_100000_250000 = {
             "colors": ["#888888", "#FFFFFF"],
             "widths": [3, 1],
             "caps": ["round", "round"],
-            "opacity": 1, 
+            "opacity": 1,
             "geometryName": "geometry",
             "andFilters": {"bridge": 1}
-        },
-        "rail": {
-            "colors": ["#919191"],
-            "dasharray": "2.0 2.0",
-            "widths": [0.7],
-            "caps": ["BUTT"],
-            "opacity": 0.7,
-            "geometryName": "geometry"
         },
         "motorway": {
             "colors": ["#BA6E27", "#FD923A"],

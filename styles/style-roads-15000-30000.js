@@ -313,20 +313,6 @@ var style_roads_15000_30000 = {
             "geometryName": "geometry",
             "textStyle": {}
         },
-        "service": {
-            "colors": ["#D6D6D6","#FFFFFF"],
-            "widths": [4,2],
-            "caps": ["round", "round"],
-            "opacity": 1,
-            "geometryName": "geometry"
-        },
-        "road": {
-            "colors": ["#C1B59D", "#FFFFFF"],
-            "widths": [4,2],
-            "caps": ["round", "round"],
-            "opacity": 1,
-            "geometryName": "geometry"
-        },
         "living_street": {
             "colors": ["#D6D6D6", "#FFFFFF"],
             "widths": [4,2],

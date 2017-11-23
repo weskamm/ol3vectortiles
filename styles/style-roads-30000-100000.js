@@ -295,23 +295,9 @@ var style_roads_30000_100000 = {
             "geometryName": "geometry"
         },
         "residential": {
-            "colors": ["#C1B59D", "#FFFFFF"],
-            "widths": [3, 1],
-            "caps": ["round", "round"],
-            "opacity": 1,
-            "geometryName": "geometry"
-        },
-        "service": {
-            "colors": ["#C1B59D", "#FFFFFF"],
-            "widths": [4, 2],
-            "caps": ["round", "round"],
-            "opacity": 1,
-            "geometryName": "geometry"
-        },
-        "road": {
-            "colors": ["#C1B59D", "#FFFFFF"],
-            "widths": [4, 2],
-            "caps": ["round", "round"],
+            "colors": ["#C1B59D"],
+            "widths": [1],
+            "caps": ["round"],
             "opacity": 1,
             "geometryName": "geometry"
         },

@@ -1,16 +1,8 @@
-var style_roads_250000_1000000 = {
+var style_roads_100000_150000 = {
     "style": {
         "motorway (bridge)": {
             "colors": ["#888888", "#FD923A"],
-            "widths": [4, 2],
-            "caps": ["round", "round"],
-            "opacity": 1,
-            "andFilters": {"bridge": 1},
-            "geometryName": "geometry"
-        },
-       "motorway_link (bridge)": {
-            "colors": ["#BA6E27", "#FEC392"],
-            "widths": [1, 0.5],
+            "widths": [6, 4],
             "caps": ["round", "round"],
             "opacity": 1,
             "andFilters": {"bridge": 1},
@@ -18,30 +10,62 @@ var style_roads_250000_1000000 = {
         },
         "trunk (bridge)": {
             "colors": ["#888888", "#FFC345"],
-            "widths": [4, 2],
+            "widths": [6, 4],
             "caps": ["round", "round"],
             "opacity": 1,
             "andFilters": {"bridge": 1},
             "geometryName": "geometry"
         },
-        "trunk_link (bridge)": {
-            "colors": ["#888888", "#FFC345"],
+        "primary (bridge)": {
+            "colors": ["#888888", "#FFFFFF"],
+            "widths": [5, 3],
+            "caps": ["round", "round"],
+            "opacity": 1,
+            "geometryName": "geometry",
+            "andFilters": {"bridge": 1}
+        },
+        "secondary (bridge)": {
+            "colors": ["#888888", "#FFFFFF"],
+            "widths": [4, 2],
+            "caps": ["round", "round"],
+            "opacity": 1,
+            "geometryName": "geometry",
+            "andFilters": {"bridge": 1}
+        },
+        "tertiary (bridge)": {
+            "colors": ["#888888", "#FFFFFF"],
             "widths": [3, 1],
             "caps": ["round", "round"],
             "opacity": 1,
-            "andFilters": {"bridge": 1},
+            "geometryName": "geometry",
+            "andFilters": {"bridge": 1}
+        },
+        "rail": {
+            "colors": ["#919191"],
+            "dasharray": "2.0 2.0",
+            "widths": [0.7],
+            "caps": ["BUTT"],
+            "opacity": 0.7,
             "geometryName": "geometry"
         },
         "motorway": {
             "colors": ["#BA6E27", "#FD923A"],
-            "widths": [4, 2],
+            "widths": [6, 4],
             "caps": ["round", "round"],
             "opacity": 1,
             "geometryName": "geometry"
         },
+        "motorway_link (bridge)": {
+            "colors": ["#BA6E27", "#FEC392"],
+            "widths": [1.5, 0.75],
+            "caps": ["round", "round"],
+            "opacity": 1,
+            "andFilters": {"bridge": 1},
+            "geometryName": "geometry"
+        },
         "motorway (tunnel)": {
             "colors": ["#FD923A"],
-            "widths": [2],
+            "widths": [4],
             "caps": ["round"],
             "opacity": 0.4,
             "andFilters": {"tunnel": 1},
@@ -56,7 +80,7 @@ var style_roads_250000_1000000 = {
         },
         "motorway_link (tunnel)": {
             "colors": ["#FD923A"],
-            "widths": [1],
+            "widths": [3],
             "caps": ["round"],
             "opacity": 0.4,
             "andFilters": {"tunnel": 1},
@@ -64,14 +88,14 @@ var style_roads_250000_1000000 = {
         },
         "trunk": {
             "colors": ["#DD9F11", "#FFC345"],
-            "widths": [3, 1],
+            "widths": [6, 4],
             "caps": ["round", "round"],
             "opacity": 1,
             "geometryName": "geometry"
         },
         "trunk (tunnel)": {
             "colors": ["#FFC345"],
-            "widths": [2],
+            "widths": [4],
             "caps": ["round"],
             "opacity": 0.4,
             "andFilters": {"tunnel": 1},
@@ -79,55 +103,31 @@ var style_roads_250000_1000000 = {
         },
         "primary (bundesstraßen)": {
             "colors": ["#C1B59D", "#FFFD8B"],
-            "widths": [3, 1],
+            "widths": [5, 3],
             "caps": ["round", "round"],
             "opacity": 1,
             "andFilters": {"notEqualFilter": {"ref": ""}},
             "geometryName": "geometry"
         },
-        "primary (bridge)": {
-            "colors": ["#888888", "#FFFFFF"],
-            "widths": [2, 0.5],
-            "caps": ["round", "round"],
-            "opacity": 1,
-            "geometryName": "geometry",
-            "andFilters": {"bridge": 1}
-        },
-        "primary_link (bridge)": {
-            "colors": ["#888888", "#FFFFFF"],
-            "widths": [2, 0.5],
-            "caps": ["round", "round"],
-            "opacity": 1,
-            "geometryName": "geometry",
-            "andFilters": {"bridge": 1}
-        },
         "primary": {
             "colors": ["#C1B59D", "#FFFD8B"],
-            "widths": [2, 0.5],
+            "widths": [5, 3],
             "caps": ["round", "round"],
             "opacity": 1,
             "andFilters": {"ref": ""},
             "geometryName": "geometry"
         },
         "primary (tunnel)": {
-            "colors": ["#C1B59D"],
-            "widths": [2],
+            "colors": ["#FFFFFF"],
+            "widths": [3],
             "caps": ["round"],
             "opacity": 0.4,
             "andFilters": {"tunnel": 1},
             "geometryName": "geometry"
         },
-        "secondary (bridge)": {
-            "colors": ["#888888", "#FFFFFF"],
-            "widths": [2, 0.5],
-            "caps": ["round", "round"],
-            "opacity": 1,
-            "geometryName": "geometry",
-            "andFilters": {"bridge": 1}
-        },
         "secondary": {
             "colors": ["#C1B59D", "#FFFFFF"],
-            "widths": [2, 0.5],
+            "widths": [4, 2],
             "caps": ["round", "round"],
             "opacity": 1,
             "geometryName": "geometry"
@@ -140,24 +140,16 @@ var style_roads_250000_1000000 = {
             "geometryName": "geometry",
             "andFilters": {"tunnel": 1}
         },
-        "tertiary (bridge)": {
-            "colors": ["#888888", "#FFFFFF"],
-            "widths": [2, 0.5],
-            "caps": ["round", "round"],
-            "opacity": 1,
-            "geometryName": "geometry",
-            "andFilters": {"bridge": 1}
-        },
         "tertiary": {
             "colors": ["#C1B59D", "#FFFFFF"],
-            "widths": [2, 0.5],
+            "widths": [3, 1],
             "caps": ["round", "round"],
             "opacity": 1,
             "geometryName": "geometry"
         },
         "tertiary (tunnel)": {
-            "colors": ["#C1B59D"],
-            "widths": [2],
+            "colors": ["#FFFFFF"],
+            "widths": [1],
             "caps": ["round"],
             "opacity": 0.4,
             "geometryName": "geometry",
