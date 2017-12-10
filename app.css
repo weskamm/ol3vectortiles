@@ -2,18 +2,27 @@
  * Application specific CSS
  */
 body {
-    padding-top: 50px;
+    width: 100%;
+    height: 100%;
+    font-family: sans-serif;
+}
+
+#container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+#layerbox {
+    float: left;
+    width: 220px;
 }
 #map {
+    float: right;
     background-color: #F2EFE9;
-    margin: 20px 0px 0px 0px;
+    width: 100%;
+    height: 100%;
 }
-#stylecontainer {
-    padding-left: 20px;
-}
-.navbar-fixed-top .container {
-    margin-left: 15px;
-}
+
 .ol-attribution li {
     font-size: 2em;
 }
