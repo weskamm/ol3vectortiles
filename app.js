@@ -2,7 +2,7 @@
  * Main Application
  */
 
- var useDeclutter = false;
+ var useDeclutter = true;
 
  var map;
 
@@ -33,13 +33,29 @@ var createLayers = function(map) {
         })
     });
 
+    this.bluebackground = new ol.layer.VectorTile({
+        name: 'bluebackground_no_limit',
+        renderMode: 'image',
+        source: new ol.source.VectorTile({
+            format: new ol.format.MVT(),
+            tileGrid: ol.tilegrid.createXYZ({
+                tileSize: [512,512]
+            }),
+            url: 'http://localhost/geoserver/gwc/service/tms/1.0.0/' + 'osm:bluebackground_no_limit' +
+                '@EPSG%3A3857@pbf/{z}/{x}/{-y}.pbf'
+        }),
+        style: function(feature, resolution) {
+            return buildStyle(feature, resolution, style_bluebackground, 'polygon');
+        }
+    });
+
     this.countries = new ol.layer.VectorTile({
         name: 'country_boundaries_50m',
         renderMode: 'image',
         declutter: useDeclutter,
         //maxResolution: 35,
         source: new ol.source.VectorTile({
-             format: new ol.format.MVT(),
+            format: new ol.format.MVT(),
             tileGrid: ol.tilegrid.createXYZ({
                 tileSize: [512,512]
             }),
@@ -57,7 +73,7 @@ var createLayers = function(map) {
         renderMode: 'image',
         declutter: useDeclutter,
         source: new ol.source.VectorTile({
-             format: new ol.format.MVT(),
+            format: new ol.format.MVT(),
             tileGrid: ol.tilegrid.createXYZ({
                 tileSize: [512,512]
             }),
@@ -173,26 +189,26 @@ var createLayers = function(map) {
         style: function(feature, resolution) {
             var text = feature.get('name'),
                 type = feature.get('type'),
-                font = 'px sans-serif',
-                zIndex;
+                fontString = 'px sans-serif',
+                fontSize;
 
-            if (type === 'country') {
-                font = 18 + font;
-                zIndex = 9999;
-            } else if (type === 'city') {
-                font = 16 + font;
-                zIndex = 9998;
-            } else if (type === 'town') {
-                font = 15 + font;
-                zIndex = 9997;
-            } else if (type === 'village') {
-                font = 14 + font;
-                zIndex = 9996;
+            // if (type === 'country') {
+            //     fontSize = 17;
+            // } else
+            if (type === 'city') {
+                fontSize = 16;
+            } else if (type === 'town' && resolution < 600) {
+                fontSize = 15;
+            } else if (type === 'village' && resolution < 75) {
+                fontSize = 14;
+            } else {
+                return null;
             }
 
+            fontString = fontSize + fontString;
             var style =  [new ol.style.Style({
                 text: new ol.style.Text({
-                    font: font,
+                    font: fontString,
                     text: text,
                     fill: new ol.style.Fill({
                         color: '#000',
@@ -203,36 +219,46 @@ var createLayers = function(map) {
                         width: 5
                     })
                 }),
-                zIndex: zIndex
+                zIndex: 999 + fontSize
             })];
             return style;
         }
     });
 
-    layers.push(landusage,waterareas,waterways,countries,buildings,roads,places);
+    layers.push(/*bluebackground,*/landusage,waterareas,waterways,buildings,roads,places,countries);
     map.getView().on('change:resolution', function(evt) {
         var res = evt.target.getResolution();
+        // var forceRender = false;
         if (res <= 9 && evt.oldValue > 9) {
             this.landusage.getSource().setUrl('http://localhost/geoserver/gwc/service/tms/1.0.0/' + 'osm:osm_landusages' +
                 '@EPSG%3A3857@pbf/{z}/{x}/{-y}.pbf');
+            // forceRender = true;
         } else if (res > 9 && evt.oldValue <= 9) {
             this.landusage.getSource().setUrl('http://localhost/geoserver/gwc/service/tms/1.0.0/' + 'osm:osm_landusages_gen0_no_limit' +
                 '@EPSG%3A3857@pbf/{z}/{x}/{-y}.pbf');
+            // forceRender = true;
         }
         if (res <= 35 && evt.oldValue > 35) {
             this.roads.getSource().setUrl('http://localhost/geoserver/gwc/service/tms/1.0.0/' + 'osm:osm_roads' +
                 '@EPSG%3A3857@pbf/{z}/{x}/{-y}.pbf');
+            // forceRender = true;
         } else if (res > 35 && evt.oldValue <= 35) {
-          this.roads.getSource().setUrl('http://localhost/geoserver/gwc/service/tms/1.0.0/' + 'osm:osm_roads_gen0' +
-              '@EPSG%3A3857@pbf/{z}/{x}/{-y}.pbf');
+            this.roads.getSource().setUrl('http://localhost/geoserver/gwc/service/tms/1.0.0/' + 'osm:osm_roads_gen0' +
+                '@EPSG%3A3857@pbf/{z}/{x}/{-y}.pbf');
+            // forceRender = true;
         }
         if (res <= 38 && evt.oldValue > 38) {
             this.waterareas.getSource().setUrl('http://localhost/geoserver/gwc/service/tms/1.0.0/' + 'osm:osm_waterareas' +
                 '@EPSG%3A3857@pbf/{z}/{x}/{-y}.pbf');
+            // forceRender = true;
         } else if (res > 38 && evt.oldValue <= 38) {
-          this.waterareas.getSource().setUrl('http://localhost/geoserver/gwc/service/tms/1.0.0/' + 'osm:osm_waterareas_gen0_no_limit' +
-              '@EPSG%3A3857@pbf/{z}/{x}/{-y}.pbf');
+            this.waterareas.getSource().setUrl('http://localhost/geoserver/gwc/service/tms/1.0.0/' + 'osm:osm_waterareas_gen0_no_limit' +
+                '@EPSG%3A3857@pbf/{z}/{x}/{-y}.pbf');
+            // forceRender = true;
         }
+        // if (forceRender) {
+        //     map.renderSync();
+        // }
     }.bind(this));
 
     return layers;
@@ -247,7 +273,7 @@ var buildStyle = function(feature, resolution, styleArray, geom) {
     }
 
     var props = feature.getProperties(),
-        type = props.type || null,
+        type = props.type || "",
         text = props.name || props.ref || null,
         isHighWay = props.type === 'motorway' && props.class === 'highway' && props.ref.indexOf("A") > -1,
         styleToUse;
@@ -258,7 +284,7 @@ var buildStyle = function(feature, resolution, styleArray, geom) {
         }
     });
     if (!styleToUse || !styleToUse[type]) {
-      return null;
+        return null;
     }
     var style = [];
     if (geom === 'line') {
@@ -291,20 +317,29 @@ var buildStyle = function(feature, resolution, styleArray, geom) {
         var polyStyle = new ol.style.Style({
           fill: (styleToUse[type].fillColor || styleToUse[type].fillOpacity) ?
               new ol.style.Fill({
-                color: styleToUse[type].fillColor || 'blue',
-                opacity: styleToUse[type].fillOpacity || 1
+                color: styleToUse[type].fillColor || 'blue'
               }) : undefined,
           stroke: (styleToUse[type].strokeColor || styleToUse[type].strokeWidth) ?
               new ol.style.Stroke({
                   color: styleToUse[type].strokeColor || 'blue',
                   width: styleToUse[type].strokeWidth || 1,
-                  lineCap: styleToUse[type].lineCap || 'round',
-                  opacity: styleToUse[type].strokeOpacity || 1
+                  lineCap: styleToUse[type].lineCap || 'round'
               }) : undefined,
           zIndex: styleToUse[type].zIndex || (feature.get('z_order') || 3)
           // why 3? -> because we render park and wood on 1 and 2...
           // this is some 'fix' for handling weired or undefined z_order in osm data
         });
+        // set the alpha values
+        if (polyStyle.getFill() && styleToUse[type].fillOpacity) {
+            var color = ol.color.asArray(polyStyle.getFill().getColor());
+            color[3] = styleToUse[type].fillOpacity;
+            polyStyle.getFill().setColor(color);
+        }
+        if (polyStyle.getStroke() && styleToUse[type].strokeOpacity) {
+            var color = ol.color.asArray(polyStyle.getStroke().getColor());
+            color[3] = styleToUse[type].strokeOpacity;
+            polyStyle.getStroke().setColor(color);
+        }
         style.push(polyStyle);
     }
 
@@ -320,6 +355,7 @@ var buildStyle = function(feature, resolution, styleArray, geom) {
         labelStyle.getText().setPlacement(styleToUse[type].textPlacement || 'line');
 
         labelStyle.getText().setText(feature.get('name'));
+        labelStyle.getText().setFont(styleToUse[type].font || '13px sans-serif');
         labelStyle.setZIndex(feature.get('z_order') + 999 || 999);
         style.push(labelStyle);
     }
