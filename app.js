@@ -36,16 +36,37 @@ var createLayers = function(map) {
     this.bluebackground = new ol.layer.VectorTile({
         name: 'bluebackground_no_limit',
         renderMode: 'image',
+        declutter: useDeclutter,
         source: new ol.source.VectorTile({
             format: new ol.format.MVT(),
             tileGrid: ol.tilegrid.createXYZ({
                 tileSize: [512,512]
             }),
-            url: 'http://localhost/geoserver/gwc/service/tms/1.0.0/' + 'osm:bluebackground_no_limit' +
+            url: 'http://localhost/geoserver/gwc/service/tms/1.0.0/' + 'osm:osm_world' +
                 '@EPSG%3A3857@pbf/{z}/{x}/{-y}.pbf'
         }),
         style: function(feature, resolution) {
-            return buildStyle(feature, resolution, style_bluebackground, 'polygon');
+
+            var l = feature.get('layer');
+            //console.log(l);
+            var style;
+            switch (l) {
+                case 'osm_roads':
+                    style = buildStyle(feature, resolution, style_roads, 'line');
+                    break;
+                case 'osm_buildings':
+                    style = buildStyle(feature, resolution, style_buildings, 'polygon');
+                    break;
+                case 'osm_landusages':
+                    style = buildStyle(feature, resolution, style_landusage, 'polygon');
+                    break;
+                case 'osm_waterareas':
+                    style = buildStyle(feature, resolution, style_waterareas, 'polygon');
+                    break;
+                default:
+                    break;
+            }
+            return style;
         }
     });
 
@@ -225,7 +246,8 @@ var createLayers = function(map) {
         }
     });
 
-    layers.push(/*bluebackground,*/landusage,waterareas,waterways,buildings,roads,places,countries);
+    //layers.push(/*bluebackground,*/landusage,waterareas,waterways,buildings,roads,places,countries);
+    layers.push(bluebackground);
     map.getView().on('change:resolution', function(evt) {
         var res = evt.target.getResolution();
         // var forceRender = false;
