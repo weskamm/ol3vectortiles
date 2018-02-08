@@ -1,196 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>OSM Vectortiles with TileStache and OL3</title>
-
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
-        <!-- Bootstrap -->
-        <!-- Latest compiled and minified CSS / JS-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-        <!-- MiniColors Plugin -->
-        <script src="http://labs.abeautifulsite.net/jquery-minicolors/jquery.minicolors.js"></script>
-        <link rel="stylesheet" href="http://labs.abeautifulsite.net/jquery-minicolors/jquery.minicolors.css">
-
-        <!-- OL3 -->
-        <link rel="stylesheet" href="http://openlayers.org/en/v3.10.1/css/ol.css" type="text/css">
-        <script src='http://openlayers.org/en/v3.10.1/build/ol-debug.js'></script>
-
-        <!-- app resources -->
-        <script src='styles/style-roads-0-2500.js'></script>
-        <script src='styles/style-roads-2500-15000.js'></script>
-        <script src='styles/style-roads-15000-35000.js'></script>
-        <script src='styles/style-roads-35000-100000.js'></script>
-        <script src='styles/style-roads-100000-250000.js'></script>
-        <script src='styles/style-roads-250000-1000000.js'></script>
-        <script src='styles/style-roads-1000000-2500000.js'></script>
-        <script src='styles/style-roads-2500000-5000000.js'></script>
-        <script src='styles/style-roads-5000000-40000000.js'></script>
-        <script src='styles/style-landusage.js'></script>
-
-    </head>
-    <body>
-
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div id="navbar" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">OSM Vectortiles with TileStache and OL3</a></li>
-                        <li><a href="https://github.com/weskamm/ol3vectortiles">See Code on Github</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <div class="container-fluid">
-            <div class="row-fluid">
-                <div class="col-lg-3 sidebar" id="sidebar">
-                    <ul class="nav nav-sidebar">
-                        <div class="panel-group" id="accordion">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Layers</a>
-                                    </h4>
-                                </div>
-                            <div id="collapse1" class="panel-collapse collapse in">
-                                <div class="panel-body">
-                                    <li><span>Vectorlayers</span></li>
-                                    <ul class="inputs-list">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" id="landusagevisibility" checked=true> Landusage</input>
-                                            </label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" id="roadsvisibility" checked=true> Roads</input>
-                                            </label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" id="buildingsvisibility" checked=true> Buildings</input>
-                                            </label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" id="waterwaysvisibility" checked=true> Waterways</input>
-                                            </label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" id="waterareasvisibility" checked=true> Waterareas</input>
-                                            </label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" id="placesvisibility" checked=true> Places / Labels</input>
-                                            </label>
-                                        </div>
-                                    </ul>
-                                    <li>WMS</li>
-                                    <ul class="inputs-list">
-                                        <div class="checkbox">
-                                            <label>
-                                                 <input type="checkbox" id="osmwmsvisibility"> OSM-WMS</input>
-                                            </label>
-                                        </div>
-                                    </ul>
-                               </div>
-                           </div>
-                           <div class="panel panel-default">
-                               <div class="panel-heading">
-                                   <h4 class="panel-title">
-                                       <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Styles</a>
-                                   </h4>
-                               </div>
-                               <div id="collapse2" class="panel-collapse collapse">
-                                   <div class="panel-body">
-                                       <div class="checkbox">
-                                           <label>
-                                               <input type="checkbox" id="rendergrayscale"> Render grayscale</input>
-                                           </label>
-                                       </div>
-                                       <div class="checkbox">
-                                           <label>
-                                               <input type="checkbox" id="stylefeatures"> Style features</input>
-                                           </label>
-                                       </div>
-                                       <div id="stylecontainer" style="display:none">
-                                           <div id="styledescription">
-                                               <span>
-                                                   <li>1.) Select a feature in the map</li>
-                                                   <li>2.) Pick a color from the picker below</li>
-                                               </span>
-                                           </div><br>
-                                       <div id="colorpicker"></div>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-
-                       <div class="panel panel-default">
-                           <div class="panel-heading">
-                               <h4 class="panel-title">
-                                   <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Statistics</a>
-                               </h4>
-                           </div>
-                           <div id="collapse3" class="panel-collapse collapse">
-                               <div class="panel-body">
-                                   <li><span>Statistics</<span>
-                                       <fieldset id="stats">
-                                           <fieldset> Roads (all):
-                                               <span name="coordinatepairsroads">not available</span> /
-                                               <span name="vectorsroads">not available</span>
-                                           </fieldset>
-                                           <fieldset> Roads (visible):
-                                               <span name="coordinatepairsroadsvisible">not available</span> /
-                                               <span name="vectorsroadsvisible">not available</span>
-                                           </fieldset><br>
-                                           <fieldset> Buildings (all):
-                                               <span name="coordinatepairsbuildings">not available</span> /
-                                               <span name="vectorsbuildings">not available</span>
-                                           </fieldset>
-                                           <fieldset> Buildings (visible):
-                                               <span name="coordinatepairsbuildingsvisible">not available</span> /
-                                               <span name="vectorsbuildingsvisible">not available</span>
-                                           </fieldset><br>
-                                           <fieldset> Landusage (all):
-                                               <span name="coordinatepairslandusage">not available</span> /
-                                               <span name="vectorslandusage">not available</span>
-                                           </fieldset>
-                                           <fieldset> Landusage (visible):
-                                               <span name="coordinatepairslandusagevisible">not available</span> /
-                                               <span name="vectorslandusagevisible">not available</span>
-                                           </fieldset><br>
-                                       </fieldset>
-                                   </li>
-                               </div>
-                           </div>
-                       </div>
-                   </ul>
-               </div>
-           </div>
-           <div class="col-lg-9">
-               <div id='map' style="height:100%">
-           </div>
-       </div>
-       <link rel="stylesheet" href="app.css" type="text/css">
-       <script src='app.js'></script>
-    </body>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>terrestris OSM Vectortiles with OL4</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.4/css/ol.css" type="text/css">
+    <script src='https://openlayers.org/en/v4.6.4/build/ol.js'></script>
+    <script src='styles/style-admin.js'></script>
+    <script src='styles/style-bluebackground.js'></script>
+    <script src='styles/style-buildings.js'></script>
+    <script src='styles/style-roads.js'></script>
+    <script src='styles/style-landusage.js'></script>
+    <script src='styles/style-waterways.js'></script>
+    <script src='styles/style-waterareas.js'></script>
+    <script src='styles/style-countries.js'></script>
+    <link rel="stylesheet" href="app.css" type="text/css">
+    <script src='terrestrisTiles.js'></script>
+  </head>
+  <body>
+    <div id='map' />
+    <script>
+      var map = new ol.Map({
+          layers: [],
+          target: 'map',
+          view: new ol.View({
+              center: [789943.208725382, 6574238.796471646],
+              zoom: 15,
+              maxZoom: 20
+          }),
+          controls: ol.control.defaults({
+              attributionOptions: ({
+                 collapsible: true
+              })
+          })
+      });
+      var layer = terrestrisTiles.getOSMLayer();
+      map.addLayer(layer);
+   </script>
+  </body>
 </html>

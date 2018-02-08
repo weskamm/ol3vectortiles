@@ -1,22 +1,14 @@
-/**
- * Application specific CSS
- */
 body {
-    padding-top: 50px;
+  font-family: sans-serif;
 }
 #map {
-    background-color: #F2EFE9;
-    margin: 20px 0px 0px 0px;
-}
-#stylecontainer {
-    padding-left: 20px;
-}
-.navbar-fixed-top .container {
-    margin-left: 15px;
+  width: 100%;
+  height: 100%;
 }
 .ol-attribution li {
-    font-size: 2em;
+  font-size: 1.5em;
 }
 .ol-attribution.ol-uncollapsible {
-	height: 3em;
+  height: 3em;
+  width: 17em;
 }
