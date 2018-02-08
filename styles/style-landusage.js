@@ -1,6 +1,6 @@
 var style_landusage = [{
     "minResolution": 0,
-    "maxResolution": 099,
+    "maxResolution": 600,
     "style": {
         "forest": {
             "useLabels": false,

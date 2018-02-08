@@ -8,7 +8,8 @@ var style_roads = [
             "dasharray": "2.0 2.0",
             "widths": [2],
             "caps": ["butt"],
-            "opacity": 1
+            "opacity": 1,
+            "useLabels": false
         },
         "motorway": {
             "colors": ["#BA6E27", "#FD923A"],
@@ -17,8 +18,8 @@ var style_roads = [
             "opacity": 1
         },
         "motorway_link": {
-            "colors": ["#BA6E27", "#FEC392"],
-            "widths": [11, 10],
+            "colors": ["#BA6E27", "#FD923A"],
+            "widths": [17, 15],
             "caps": ["butt", "round"],
             "opacity": 1
         },
@@ -29,8 +30,8 @@ var style_roads = [
             "opacity": 1
         },
         "trunk_link": {
-            "colors": ["#C1B59D", "#EDC872"],
-            "widths": [17, 14],
+            "colors": ["#C1B59D", "#FFC345"],
+            "widths": [17, 15],
             "caps": ["butt", "round"],
             "opacity": 1
         },
@@ -90,7 +91,7 @@ var style_roads = [
         },
         "service": {
             "colors": ["#C1B59D", "#FFFFFF"],
-            "widths": [13, 11],
+            "widths": [6, 4],
             "caps": ["butt", "round"],
             "opacity": 1
         },
@@ -137,7 +138,8 @@ var style_roads = [
             "dasharray": "2.0 2.0",
             "widths": [1],
             "caps": ["butt"],
-            "opacity": 0.8
+            "opacity": 0.8,
+            "useLabels": false
         },
         "motorway": {
             "colors": ["#BA6E27", "#FD923A"],
@@ -146,8 +148,8 @@ var style_roads = [
             "opacity": 1
         },
         "motorway_link": {
-            "colors": ["#BA6E27", "#FEC392"],
-            "widths": [5, 4],
+            "colors": ["#BA6E27", "#FD923A"],
+            "widths": [9, 7],
             "caps": ["butt", "round"],
             "opacity": 1
         },
@@ -158,8 +160,8 @@ var style_roads = [
             "opacity": 1
         },
         "trunk_link": {
-            "colors": ["#C1B59D", "#EDC872"],
-            "widths": [5, 3],
+            "colors": ["#C1B59D", "#FFC345"],
+            "widths": [8, 6],
             "caps": ["butt", "round"],
             "opacity": 1
         },
@@ -217,6 +219,18 @@ var style_roads = [
             "caps": ["butt", "round"],
             "opacity": 1
         },
+        "service": {
+            "colors": ["#C1B59D", "#FFFFFF"],
+            "widths": [4, 2],
+            "caps": ["butt", "round"],
+            "opacity": 1
+        },
+        "road": {
+            "colors": ["#C1B59D", "#FFFFFF"],
+            "widths": [4, 2],
+            "caps": ["butt", "round"],
+            "opacity": 1
+        },
         "living_street": {
             "colors": ["#C1B59D", "#FFFFFF"],
             "widths": [4, 2],
@@ -253,7 +267,8 @@ var style_roads = [
             "dasharray": "2.0 2.0",
             "widths": [0.7],
             "caps": ["butt"],
-            "opacity": 0.7
+            "opacity": 0.7,
+            "useLabels": false
         },
         "motorway": {
             "colors": ["#BA6E27", "#FD923A"],
@@ -262,8 +277,8 @@ var style_roads = [
             "opacity": 1
         },
         "motorway_link": {
-            "colors": ["#BA6E27", "#FEC392"],
-            "widths": [5, 4],
+            "colors": ["#BA6E27", "#FD923A"],
+            "widths": [7, 5],
             "caps": ["butt", "round"],
             "opacity": 1
         },
@@ -274,8 +289,8 @@ var style_roads = [
             "opacity": 1
         },
         "trunk_link": {
-            "colors": ["#C1B59D", "#EDC872"],
-            "widths": [4, 2],
+            "colors": ["#C1B59D", "#FFC345"],
+            "widths": [6, 4],
             "caps": ["butt", "round"],
             "opacity": 1
         },
@@ -369,7 +384,8 @@ var style_roads = [
             "dasharray": "2.0 2.0",
             "widths": [0.7],
             "caps": ["butt"],
-            "opacity": 0.7
+            "opacity": 0.7,
+            "useLabels": false
         },
         "motorway": {
             "colors": ["#BA6E27", "#FD923A"],
@@ -378,8 +394,8 @@ var style_roads = [
             "opacity": 1
         },
         "motorway_link": {
-            "colors": ["#BA6E27", "#FEC392"],
-            "widths": [1, 0.5],
+            "colors": ["#BA6E27", "#FD923A"],
+            "widths": [4, 2],
             "caps": ["butt", "round"],
             "opacity": 1
         },
@@ -419,7 +435,7 @@ var style_roads = [
             "opacity": 1
         },
         "motorway_link": {
-            "colors": ["#FEC392"],
+            "colors": ["#FD923A"],
             "widths": [3],
             "caps": ["butt"],
             "opacity": 1
@@ -460,7 +476,7 @@ var style_roads = [
             "opacity": 1
         },
         "motorway_link": {
-            "colors": ["#FEC392"],
+            "colors": ["#FD923A"],
             "widths": [2],
             "caps": ["butt"],
             "opacity": 1
@@ -472,7 +488,8 @@ var style_roads = [
             "opacity": 1
         }
     }
-}, {
+},
+{
     "minResolution": 305.74,
     "maxResolution": 611.49,
     "style": {
@@ -483,7 +500,7 @@ var style_roads = [
             "opacity": 1
         },
         "motorway_link": {
-            "colors": ["#FEC392"],
+            "colors": ["#FD923A"],
             "widths": [2],
             "caps": ["butt"],
             "opacity": 1
@@ -506,7 +523,7 @@ var style_roads = [
             "opacity": 1
         },
       "motorway_link": {
-            "colors": ["#FEC392"],
+            "colors": ["#FD923A"],
             "widths": [2],
             "caps": ["butt"],
             "opacity": 0
@@ -518,4 +535,5 @@ var style_roads = [
             "opacity": 0
         }
     }
-}];
+}
+];

@@ -6,11 +6,10 @@ var style_waterways = [{
             "colors": ["#99B3CC"],
             "widths": [1],
             "caps": ["butt"],
-            "fillOpacity": 1,
             "textFillColor": "#003fff",
             "textFillWidth": 3,
             "textStrokeColor": "#fff",
-            "textStrokeWidth": 5,
+            "textStrokeWidth": 5
         }
     }
 }];

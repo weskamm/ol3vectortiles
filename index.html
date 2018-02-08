@@ -1,114 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>OSM Vectortiles with OL4</title>
-
-        <link rel="stylesheet" href="https://openlayers.org/en/v4.5.0/css/ol.css" type="text/css">
-        <script src='https://openlayers.org/en/v4.5.0/build/ol.js'></script>
-
-        <script src='styles/style-bluebackground.js'></script>
-        <script src='styles/style-buildings.js'></script>
-        <script src='styles/style-roads.js'></script>
-        <script src='styles/style-landusage.js'></script>
-        <script src='styles/style-waterways.js'></script>
-        <script src='styles/style-waterareas.js'></script>
-        <script src='styles/style-countries.js'></script>
-        <link rel="stylesheet" href="app.css" type="text/css">
-        <script src='app.js'></script>
-
-    </head>
-    <body>
-        <div id="container">
-            <div id="layerbox">
-                <li><span>Layer</span></li>
-                <ul class="inputs-list">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="landusagevisibility" checked=true> Landusage</input>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="roadsvisibility" checked=true> Roads</input>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="buildingsvisibility" checked=true> Buildings</input>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="waterwaysvisibility" checked=true> Waterways</input>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="waterareasvisibility" checked=true> Waterareas</input>
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="placesvisibility" checked=true> Places / Labels</input>
-                        </label>
-                    </div>
-                </ul>
-            </div>
-            <div id='map'>
-        </div>
-        <script>
-
-           /**
-            * Setup the app, instanciate the map
-            */
-            var map = new ol.Map({
-                layers: [],
-                target: 'map',
-                view: new ol.View({
-                    center: [789943.208725382, 6574238.796471646],
-                    zoom: 15,
-                    maxZoom: 20
-                }),
-                controls: ol.control.defaults({
-                    attributionOptions: ({
-                       collapsible: true
-                    })
-                })
-            });
-            var layers = createLayers(map);
-            layers.forEach(function(layer) {
-                map.addLayer(layer);
-            });
-
-
-            /**
-             * Register the relevant map and DOM listeners
-             */
-            var registerListeners = function(map) {
-
-                var roadsvisibility = document.getElementById('roadsvisibility');
-                roadsvisibility.addEventListener('change', function(){roads.setVisible(!roads.getVisible())});
-
-                var landusagevisibility = document.getElementById('landusagevisibility');
-                landusagevisibility.addEventListener('change', function(){landusage.setVisible(!landusage.getVisible())});
-
-                var buildingsvisibility = document.getElementById('buildingsvisibility');
-                buildingsvisibility.addEventListener('change', function(){buildings.setVisible(!buildings.getVisible())});
-
-                var waterwaysvisibility = document.getElementById('waterwaysvisibility');
-                waterwaysvisibility.addEventListener('change', function(){waterways.setVisible(!waterways.getVisible())});
-
-                var waterareasvisibility = document.getElementById('waterareasvisibility');
-                waterareasvisibility.addEventListener('change', function(){waterareas.setVisible(!waterareas.getVisible())});
-
-                var placesvisibility = document.getElementById('placesvisibility');
-                placesvisibility.addEventListener('change', function(){places.setVisible(!places.getVisible())});
-
-            };
-            registerListeners(map);
-       </script>
-    </body>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>terrestris OSM Vectortiles with OL4</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.4/css/ol.css" type="text/css">
+    <script src='https://openlayers.org/en/v4.6.4/build/ol.js'></script>
+    <script src='styles/style-admin.js'></script>
+    <script src='styles/style-bluebackground.js'></script>
+    <script src='styles/style-buildings.js'></script>
+    <script src='styles/style-roads.js'></script>
+    <script src='styles/style-landusage.js'></script>
+    <script src='styles/style-waterways.js'></script>
+    <script src='styles/style-waterareas.js'></script>
+    <script src='styles/style-countries.js'></script>
+    <link rel="stylesheet" href="app.css" type="text/css">
+    <script src='terrestrisTiles.js'></script>
+  </head>
+  <body>
+    <div id='map' />
+    <script>
+      var map = new ol.Map({
+          layers: [],
+          target: 'map',
+          view: new ol.View({
+              center: [789943.208725382, 6574238.796471646],
+              zoom: 15,
+              maxZoom: 20
+          }),
+          controls: ol.control.defaults({
+              attributionOptions: ({
+                 collapsible: true
+              })
+          })
+      });
+      var layer = terrestrisTiles.getOSMLayer();
+      map.addLayer(layer);
+   </script>
+  </body>
 </html>

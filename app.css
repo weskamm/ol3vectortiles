@@ -1,32 +1,14 @@
-/**
- * Application specific CSS
- */
 body {
-    width: 100%;
-    height: 100%;
-    font-family: sans-serif;
-}
-
-#container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-}
-#layerbox {
-    float: left;
-    width: 220px;
+  font-family: sans-serif;
 }
 #map {
-    float: right;
-    background-color: #F2EFE9;
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
-
 .ol-attribution li {
-    font-size: 2em;
+  font-size: 1.5em;
 }
 .ol-attribution.ol-uncollapsible {
-	height: 3em;
-    width: 17em;
+  height: 3em;
+  width: 17em;
 }
