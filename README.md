@@ -1,5 +1,5 @@
 # terrestris vectortiles
-A simple library that makes use of MapBox vectortiles from OpenStreetMap data.
+A simple library that makes use of free available world-wide terrestris vectortiles in MapBox MVT format from OpenStreetMap data.
 
 The main method `getOSMLayer` creates an openlayers VectorTile Layer, which you
 can use straight in your openlayers application.
@@ -12,10 +12,19 @@ A simple demonstration application can be found here:
 https://ows.terrestris.de/anwendungen.html#osm-vectortiles
 
 # how to use
-Include the `terrestrisTiles.js` file in your HTML file as a script source:
+Include the `terrestrisTiles.js` file in your HTML file as a script source,
+and also add the style files as resources:
 
 ```
 <script src='https://raw.githubusercontent.com/weskamm/ol3vectortiles/master/terrestrisTiles.js'></script>
+<script src='https://raw.githubusercontent.com/weskamm/ol3vectortiles/master/styles/style-admin.js'></script>
+<script src='https://raw.githubusercontent.com/weskamm/ol3vectortiles/master/styles/style-bluebackground.js'></script>
+<script src='https://raw.githubusercontent.com/weskamm/ol3vectortiles/master/styles/style-buildings.js'></script>
+<script src='https://raw.githubusercontent.com/weskamm/ol3vectortiles/master/styles/style-roads.js'></script>
+<script src='https://raw.githubusercontent.com/weskamm/ol3vectortiles/master/styles/style-landusage.js'></script>
+<script src='https://raw.githubusercontent.com/weskamm/ol3vectortiles/master/styles/style-waterways.js'></script>
+<script src='https://raw.githubusercontent.com/weskamm/ol3vectortiles/master/styles/style-waterareas.js'></script>
+<script src='https://raw.githubusercontent.com/weskamm/ol3vectortiles/master/styles/style-countries.js'></script>
 ```
 
 Then create the OSM-VectorTile layer by calling
@@ -41,16 +50,16 @@ in order to disable decluttering of labels. This will improve performance, but w
     <title>terrestris OSM Vectortiles with OL4</title>
     <link rel="stylesheet" href="https://openlayers.org/en/v4.6.4/css/ol.css" type="text/css">
     <script src='https://openlayers.org/en/v4.6.4/build/ol.js'></script>
-    <script src='styles/style-admin.js'></script>
-    <script src='styles/style-bluebackground.js'></script>
-    <script src='styles/style-buildings.js'></script>
-    <script src='styles/style-roads.js'></script>
-    <script src='styles/style-landusage.js'></script>
-    <script src='styles/style-waterways.js'></script>
-    <script src='styles/style-waterareas.js'></script>
-    <script src='styles/style-countries.js'></script>
-    <link rel="stylesheet" href="app.css" type="text/css">
-    <script src='terrestrisTiles.js'></script>
+    <script src='https://raw.githubusercontent.com/weskamm/ol3vectortiles/master/styles/style-admin.js'></script>
+    <script src='https://raw.githubusercontent.com/weskamm/ol3vectortiles/master/styles/style-bluebackground.js'></script>
+    <script src='https://raw.githubusercontent.com/weskamm/ol3vectortiles/master/styles/style-buildings.js'></script>
+    <script src='https://raw.githubusercontent.com/weskamm/ol3vectortiles/master/styles/style-roads.js'></script>
+    <script src='https://raw.githubusercontent.com/weskamm/ol3vectortiles/master/styles/style-landusage.js'></script>
+    <script src='https://raw.githubusercontent.com/weskamm/ol3vectortiles/master/styles/style-waterways.js'></script>
+    <script src='https://raw.githubusercontent.com/weskamm/ol3vectortiles/master/styles/style-waterareas.js'></script>
+    <script src='https://raw.githubusercontent.com/weskamm/ol3vectortiles/master/styles/style-countries.js'></script>
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/weskamm/ol3vectortiles/master/app.css" type="text/css">
+    <script src='https://raw.githubusercontent.com/weskamm/ol3vectortiles/master/terrestrisTiles.js'></script>
   </head>
   <body>
     <div id='map' />
