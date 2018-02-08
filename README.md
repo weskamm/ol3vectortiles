@@ -37,7 +37,7 @@ Optionally, you can set
 ```
 terrestrisTiles.useDeclutter = false;
 ```
-in order to disable decluttering of labels. This will improve performance, but will also make labels overlap.
+before calling `getOSMLayer` in order to disable decluttering of labels. This will improve performance, but will also make labels overlap.
 
 # Complete example
 ```
