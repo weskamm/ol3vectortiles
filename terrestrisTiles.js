@@ -59,15 +59,17 @@ terrestrisTiles.lineStringStyleAbove = new ol.style.Style({
 });
 
 // the style template used for polygons
+terrestrisTiles.polygonStyleFill = new ol.style.Fill({
+  color: 'blue'
+});
+terrestrisTiles.polygonStyleStroke = new ol.style.Stroke({
+  color: 'blue',
+  width: 1,
+  lineCap: 'round'
+});
 terrestrisTiles.polygonStyle = new ol.style.Style({
-  fill: new ol.style.Fill({
-    color: 'blue'
-  }),
-  stroke: new ol.style.Stroke({
-    color: 'blue',
-    width: 1,
-    lineCap: 'round'
-  }),
+  fill: terrestrisTiles.polygonStyleFill,
+  stroke: terrestrisTiles.polygonStyleStroke,
   zIndex: 0
 });
 
@@ -186,12 +188,30 @@ terrestrisTiles.buildStyle = function(feature, resolution, styleArray, geom) {
       style.push(terrestrisTiles.lineStringStyleAbove);
     }
   } else if (geom === 'polygon') {
-    fill = terrestrisTiles.polygonStyle.getFill();
-    fill.setColor(styleToUse[type].fillColor || 'blue');
-    stroke = terrestrisTiles.polygonStyle.getStroke();
-    stroke.setColor(styleToUse[type].strokeColor || 'blue');
-    stroke.setWidth(styleToUse[type].strokeWidth || 1);
-    stroke.setLineCap(styleToUse[type].lineCap || 'round');
+    var hasFill = styleToUse[type].fillColor || styleToUse[type].fillOpacity;
+    var hasStroke = styleToUse[type].strokeColor || styleToUse[type].strokeWidth;
+    if (hasFill) {
+      fill = terrestrisTiles.polygonStyle.getFill();
+      if (!fill) {
+        fill = terrestrisTiles.polygonStyleFill;
+        terrestrisTiles.polygonStyle.setFill(fill);
+      }
+      fill.setColor(styleToUse[type].fillColor || 'blue');
+    } else {
+      terrestrisTiles.polygonStyle.setFill(undefined);
+    }
+    if (hasStroke) {
+      stroke = terrestrisTiles.polygonStyle.getStroke();
+      if (!stroke) {
+        stroke = terrestrisTiles.polygonStyleStroke;
+        terrestrisTiles.polygonStyle.setStroke(stroke);
+      }
+      stroke.setColor(styleToUse[type].strokeColor || 'blue');
+      stroke.setWidth(styleToUse[type].strokeWidth || 1);
+      stroke.setLineCap(styleToUse[type].lineCap || 'round');
+    } else {
+      terrestrisTiles.polygonStyle.setStroke(undefined);
+    }
     terrestrisTiles.polygonStyle.setZIndex(styleToUse[type].zIndex || feature.get('z_order') || 0);
 
     // set the alpha values
