@@ -4,104 +4,124 @@ var style_landusage = [{
     "style": {
         "forest": {
             "useLabels": false,
-            "fillColor": "#CCDEAC",
+            "fillColor": "#243505",
+            "fillOpacity": 0.4,
             "zIndex": -1
         },
         "wood": {
             "useLabels": false,
-            "fillColor": "#CCDEAC",
+            "fillColor": "#243505",
+            "fillOpacity": 0.4,
             "zIndex": -1
         },
         "farm": {
             "useLabels": false,
-            "fillColor": "#DCE8A9",
+            "fillColor": "#2b3309",
+            "fillOpacity": 0.4,
             "zIndex": -1
         },
         "meadow": {
             "useLabels": false,
-            "fillColor": "#DCE8A9",
+            "fillColor": "#2b3309",
+            "fillOpacity": 0.4,
             "zIndex": -1
         },
         "grass": {
             "useLabels": false,
-            "fillColor": "#DCE8A9",
+            "fillColor": "#2b3309",
+            "fillOpacity": 0.4,
             "zIndex": -1
         },
         "pedestrian": {
             "useLabels": false,
-            "fillColor": "#FAFAF5",
+            "fillColor": "#333332",
+            "fillOpacity": 0.4,
             "zIndex": -1
         },
         "industrial": {
             "useLabels": false,
-            "fillColor": "#D1D0CD",
+            "fillColor": "#333332",
+            "fillOpacity": 0.4,
             "zIndex": -1
         },
         "commercial": {
             "useLabels": false,
-            "fillColor": "#D1D0CD",
+            "fillColor": "#333332",
+            "fillOpacity": 0.4,
             "zIndex": -1
         },
         "parking": {
             "useLabels": false,
-            "fillColor": "#D1D0CD",
+            "fillColor": "#333332",
+            "fillOpacity": 0.4,
             "zIndex": -1
         },
         "cemetery": {
             "useLabels": false,
-            "fillColor": "#D1D1D1",
+            "fillColor": "#333332",
+            "fillOpacity": 0.4,
             "zIndex": -1,
             "andFilters": {},
         },
         "park": {
             "useLabels": false,
-            "fillColor": "#B5D29C",
+            "fillColor": "#2c3326",
+            "fillOpacity": 0.4,
             "zIndex": -1,
             "zIndex": 1
         },
         "golf_course": {
             "useLabels": false,
-            "fillColor": "#B5D29C",
+            "fillColor": "#333332",
+            "fillOpacity": 0.4,
             "zIndex": -1
         },
         "hospital": {
             "useLabels": false,
             "fillColor": "#E5C6C3",
+            "fillOpacity": 0.4,
             "zIndex": -1
         },
         "school": {
             "useLabels": false,
-            "fillColor": "#DED2AC",
+            "fillColor": "#333332",
+            "fillOpacity": 0.4,
             "zIndex": -1
         },
         "college": {
             "useLabels": false,
-            "fillColor": "#DED2AC",
+            "fillColor": "#333332",
+            "fillOpacity": 0.4,
             "zIndex": -1
         },
         "university": {
             "useLabels": false,
-            "fillColor": "#DED2AC",
+            "fillColor": "#333332",
+            "fillOpacity": 0.4,
             "zIndex": -1
         },
         "sports_center": {
             "useLabels": false,
-            "fillColor": "#DED1AB",
+            "fillColor": "#38342a",
+            "fillOpacity": 0.4,
             "zIndex": -1
         },
         "stadium": {
             "useLabels": false,
-            "fillColor": "#DED1AB",
+            "fillColor": "#38342a",
+            "fillOpacity": 0.4,
             "zIndex": -1
         },
         "pitch": {
             "useLabels": false,
-            "fillColor": "#DED1AB",
+            "fillColor": "#38342a",
+            "fillOpacity": 0.4,
             "zIndex": -1
         },
         "residential": {
             "useLabels": false,
-            "fillColor": "#F2EFE9",
+            "fillColor": "#333332",
+            "fillOpacity": 0.4,
             "zIndex": -1
         }
     }

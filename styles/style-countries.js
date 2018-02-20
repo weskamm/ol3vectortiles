@@ -3,10 +3,10 @@ var style_countries = [{
     "maxResolution": 99999,
     "style": {
         "": {
-            "strokeColor": "#7d887d",
-            "strokeWidth": 2,
+            "strokeColor": "#808080",
+            "strokeWidth": 1,
             "strokeOpacity": 0.5,
-            "fillColor": '#f2efe9',
+            "fillColor": '#000',
             "useLabels": false,
             "zIndex": -2
         }

@@ -3,24 +3,26 @@ var style_waterareas = [{
     "maxResolution": 99999,
     "style": {
         "riverbank": {
-            "fillColor": "#99B3CC",
-            "strokeColor": "#99B3CC",
+            "fillColor": "#0c0525",
+            "strokeColor": "#0c0525",
             "fillOpacity": 1,
-            "textFillColor": "#003fff",
-            "textFillWidth": 3,
-            "textStrokeColor": "#fff",
-            "textStrokeWidth": 5,
-            "textPlacement": "point"
+            "useLabels": false
+            // "textFillColor": "#003fff",
+            // "textFillWidth": 3,
+            // "textStrokeColor": "#fff",
+            // "textStrokeWidth": 5,
+            // "textPlacement": "point"
         },
         "water": {
-            "fillColor": "#99B3CC",
-            "strokeColor": "#99B3CC",
+            "fillColor": "#0c0525",
+            "strokeColor": "#0c0525",
             "fillOpacity": 1,
-            "textFillColor": "#003fff",
-            "textFillWidth": 3,
-            "textStrokeColor": "#fff",
-            "textStrokeWidth": 5,
-            "textPlacement": "point"
+            "useLabels": false
+            // "textFillColor": "#003fff",
+            // "textFillWidth": 3,
+            // "textStrokeColor": "#fff",
+            // "textStrokeWidth": 5,
+            // "textPlacement": "point"
         }
     }
 }];

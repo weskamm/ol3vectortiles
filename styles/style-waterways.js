@@ -2,7 +2,7 @@ var style_waterways = [{
     "minResolution": 0,
     "maxResolution": 99999,
     "style": {
-        "river": {
+        /*"river": {
             "colors": ["#99B3CC"],
             "widths": [1],
             "caps": ["butt"],
@@ -10,6 +10,6 @@ var style_waterways = [{
             "textFillWidth": 3,
             "textStrokeColor": "#fff",
             "textStrokeWidth": 5
-        }
+        }*/
     }
 }];

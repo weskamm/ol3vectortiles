@@ -3,8 +3,8 @@ var style_bluebackground = [{
     "maxResolution": 99999,
     "style": {
         "": {
-            "fillColor": "#074ca9",
-            "fillOpacity": 0.5,
+            "fillColor": "#0c0525",
+            "fillOpacity": 1,
             "zIndex": -3
         }
     }

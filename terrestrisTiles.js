@@ -32,7 +32,7 @@ terrestrisTiles.labelStyle = new ol.style.Style({
     }),
     placement: 'line',
     maxAngle: 0.4,
-    padding: [10, 10, 10, 10]
+    padding: [40, 40, 40, 40]
   })
 });
 
@@ -120,14 +120,14 @@ terrestrisTiles.buildLabelStyle = function(feature, resolution) {
   }
   fontString = fontSize + fontString;
   var olText = terrestrisTiles.labelStyle.getText();
-  olText.getFill().setColor('#000');
-  olText.getStroke().setColor('#fff');
+  // olText.getFill().setColor('rgba(0,200,0,0.5)');
+  olText.getStroke().setColor('rgba(255,255,255,0.5)');
   olText.getStroke().setWidth(5);
   olText.setPlacement('point');
   olText.setText(text);
   olText.setFont(fontString);
   terrestrisTiles.labelStyle.setZIndex(
-    terrestrisTiles.useDeclutter ? -1 : fontSize + 1000);
+    terrestrisTiles.useDeclutter ? -fontSize : fontSize + 1000);
   return [terrestrisTiles.labelStyle];
 };
 
@@ -174,6 +174,11 @@ terrestrisTiles.buildStyle = function(feature, resolution, styleArray, geom) {
     stroke.setLineDash(styleToUse[type].dasharray ?
       styleToUse[type].dasharray.split(' ') : []);
     terrestrisTiles.lineStringStyleBelow.setZIndex(feature.get('z_order') || 0);
+    if (styleToUse[type].opacity) {
+      color = ol.color.asArray(stroke.getColor());
+      color[3] = styleToUse[type].opacity;
+      stroke.setColor(color);
+    }
     style.push(terrestrisTiles.lineStringStyleBelow);
 
     // check if we need a "outline" for this road
@@ -185,6 +190,11 @@ terrestrisTiles.buildStyle = function(feature, resolution, styleArray, geom) {
       strokeAbove.setLineDash(styleToUse[type].dasharray ?
         styleToUse[type].dasharray.split(' ') : []);
       terrestrisTiles.lineStringStyleAbove.setZIndex(feature.get('z_order') + 1 || 1);
+      if (styleToUse[type].opacity) {
+        color = ol.color.asArray(strokeAbove.getColor());
+        color[3] = styleToUse[type].opacity;
+        strokeAbove.setColor(color);
+      }
       style.push(terrestrisTiles.lineStringStyleAbove);
     }
   } else if (geom === 'polygon') {
@@ -268,7 +278,7 @@ terrestrisTiles.getOSMLayer = function() {
     source: new ol.source.VectorTile({
       format: new ol.format.MVT(),
       tileGrid: ol.tilegrid.createXYZ({
-        tileSize: [512,512]
+        tileSize: [256,256]
       }),
       url: 'https://ows.terrestris.de/osm-vectortiles/' + 'osm:osm_world' +
         '@EPSG%3A3857@pbf/{z}/{x}/{-y}.pbf',
