@@ -1,5 +1,5 @@
 var style_countries = [{
-    "minResolution": 155,
+    "minResolution": 0,
     "maxResolution": 99999,
     "style": {
         "": {

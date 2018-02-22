@@ -413,13 +413,13 @@ var style_roads = [
         },
         "secondary": {
             "colors": ["#C1B59D", "#FFFFFF"],
-            "widths": [4, 2],
+            "widths": [5, 3],
             "caps": ["butt", "round"],
             "opacity": 1
         },
         "tertiary": {
             "colors": ["#C1B59D", "#FFFFFF"],
-            "widths": [3, 1],
+            "widths": [5, 3],
             "caps": ["butt", "round"],
             "opacity": 1
         }
@@ -428,27 +428,84 @@ var style_roads = [
     "minResolution": 38.21,
     "maxResolution": 80,
     "style": {
-        "motorway": {
-            "colors": ["#FD923A"],
-            "widths": [4],
+        "rail": {
+            "colors": ["#919191"],
+            "dasharray": "2.0 2.0",
+            "widths": [0.7],
             "caps": ["butt"],
+            "opacity": 0.7,
+            "useLabels": false
+        },
+        "motorway": {
+            "colors": ["#BA6E27", "#FD923A"],
+            "widths": [5, 3],
+            "caps": ["butt", "round"],
             "opacity": 1
         },
         "motorway_link": {
-            "colors": ["#FD923A"],
-            "widths": [3],
-            "caps": ["butt"],
+            "colors": ["#BA6E27", "#FD923A"],
+            "widths": [4, 2],
+            "caps": ["butt", "round"],
             "opacity": 1
         },
         "trunk": {
-            "colors": ["#FFC345"],
-            "widths": [4],
-            "caps": ["round"],
+            "colors": ["#DD9F11", "#FFC345"],
+            "widths": [5, 3],
+            "caps": ["butt", "round"],
             "opacity": 1
         },
         "primary": {
-        	  "colors": ["#FFFD8B"],
-            "widths": [3],
+            "colors": ["#C1B59D", "#FFFD8B"],
+            "widths": [4, 2],
+            "caps": ["butt", "round"],
+            "opacity": 1
+        },
+        "secondary": {
+            "colors": ["#C1B59D", "#FFFFFF"],
+            "widths": [4, 2],
+            "caps": ["butt", "round"],
+            "opacity": 1
+        },
+        "tertiary": {
+            "colors": ["#C1B59D", "#FFFFFF"],
+            "widths": [4, 2],
+            "caps": ["butt", "round"],
+            "opacity": 1
+        }
+    }
+}, {
+    "minResolution": 80,
+    "maxResolution": 611.49,
+    "style": {
+        "rail": {
+            "colors": ["#919191"],
+            "dasharray": "2.0 2.0",
+            "widths": [0.7],
+            "caps": ["butt"],
+            "opacity": 0.7,
+            "useLabels": false
+        },
+        "motorway": {
+            "colors": ["#BA6E27", "#FD923A"],
+            "widths": [4, 2],
+            "caps": ["butt", "round"],
+            "opacity": 1
+        },
+        "motorway_link": {
+            "colors": ["#BA6E27", "#FD923A"],
+            "widths": [4, 2],
+            "caps": ["butt", "round"],
+            "opacity": 1
+        },
+        "trunk": {
+            "colors": ["#DD9F11", "#FFC345"],
+            "widths": [4, 2],
+            "caps": ["butt", "round"],
+            "opacity": 1
+        },
+        "primary": {
+            "colors": ["#FFFD8B"],
+            "widths": [2],
             "caps": ["butt"],
             "opacity": 1
         },
@@ -460,53 +517,6 @@ var style_roads = [
         },
         "tertiary": {
             "colors": ["#FFFFFF"],
-            "widths": [1],
-            "caps": ["butt"],
-            "opacity": 1
-        }
-    }
-}, {
-    "minResolution": 80,
-    "maxResolution": 305.74,
-    "style": {
-        "motorway": {
-            "colors": ["#FD923A"],
-            "widths": [2],
-            "caps": ["butt"],
-            "opacity": 1
-        },
-        "motorway_link": {
-            "colors": ["#FD923A"],
-            "widths": [2],
-            "caps": ["butt"],
-            "opacity": 1
-        },
-        "trunk": {
-            "colors": ["#FFC345"],
-            "widths": [1],
-            "caps": ["butt"],
-            "opacity": 1
-        }
-    }
-},
-{
-    "minResolution": 305.74,
-    "maxResolution": 611.49,
-    "style": {
-        "motorway": {
-            "colors": ["#FD923A"],
-            "widths": [2],
-            "caps": ["butt", "round"],
-            "opacity": 1
-        },
-        "motorway_link": {
-            "colors": ["#FD923A"],
-            "widths": [2],
-            "caps": ["butt"],
-            "opacity": 1
-        },
-        "trunk": {
-            "colors": ["#FFC345"],
             "widths": [2],
             "caps": ["butt"],
             "opacity": 1
@@ -514,26 +524,66 @@ var style_roads = [
     }
 }, {
     "minResolution": 611.49,
-    "maxResolution": 2446,
+    "maxResolution": 1222,
     "style": {
         "motorway": {
             "colors": ["#FD923A"],
             "widths": [2],
-            "caps": ["round"],
-            "opacity": 1
+            "caps": ["butt", "round"],
+            "opacity": 0.8
         },
-      "motorway_link": {
+        "motorway_link": {
             "colors": ["#FD923A"],
             "widths": [2],
             "caps": ["butt"],
-            "opacity": 0
+            "opacity": 0.8
         },
         "trunk": {
             "colors": ["#FFC345"],
             "widths": [2],
             "caps": ["butt"],
-            "opacity": 0
+            "opacity": 0.8
+        },
+        "primary": {
+            "colors": ["#FFFD8B"],
+            "widths": [1],
+            "caps": ["butt"],
+            "opacity": 0.8
+        },
+        "secondary": {
+            "colors": ["#FFFFFF"],
+            "widths": [1],
+            "caps": ["butt"],
+            "opacity": 0.8
+        },
+        "tertiary": {
+            "colors": ["#FFFFFF"],
+            "widths": [1],
+            "caps": ["butt"],
+            "opacity": 0.8
         }
     }
-}
-];
+}, {
+    "minResolution": 1222,
+    "maxResolution": 3000,
+    "style": {
+        "motorway": {
+            "colors": ["#FD923A"],
+            "widths": [1],
+            "caps": ["round"],
+            "opacity": 0.5
+        },
+        "motorway_link": {
+            "colors": ["#FD923A"],
+            "widths": [1],
+            "caps": ["butt"],
+            "opacity": 0.5
+        },
+        "trunk": {
+            "colors": ["#FFC345"],
+            "widths": [1],
+            "caps": ["butt"],
+            "opacity": 0.5
+        }
+    }
+}];
