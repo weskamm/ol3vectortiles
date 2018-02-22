@@ -148,7 +148,7 @@ terrestrisTiles.buildStyle = function(feature, resolution, styleArray, geom) {
   var type = props.type || '';
   var text = props.name || props.ref || null;
   var isHighWay = (props.type === 'motorway' || props.type === 'trunk') &&
-      props.class === 'highway' && props.ref.indexOf('A') > -1;
+      props.class === 'highway' && props.ref.indexOf('A') === 0;
   var styleToUse;
 
   styleArray.forEach(function(el) {
@@ -174,6 +174,9 @@ terrestrisTiles.buildStyle = function(feature, resolution, styleArray, geom) {
     stroke.setLineDash(styleToUse[type].dasharray ?
       styleToUse[type].dasharray.split(' ') : []);
     terrestrisTiles.lineStringStyleBelow.setZIndex(feature.get('z_order') || 0);
+    if (styleToUse[type].opacity) {
+      setOpacity(stroke, styleToUse[type].opacity);
+    }
     style.push(terrestrisTiles.lineStringStyleBelow);
 
     // check if we need a "outline" for this road
@@ -185,6 +188,9 @@ terrestrisTiles.buildStyle = function(feature, resolution, styleArray, geom) {
       strokeAbove.setLineDash(styleToUse[type].dasharray ?
         styleToUse[type].dasharray.split(' ') : []);
       terrestrisTiles.lineStringStyleAbove.setZIndex(feature.get('z_order') + 1 || 1);
+      if (styleToUse[type].opacity) {
+        setOpacity(strokeAbove, styleToUse[type].opacity);
+      }
       style.push(terrestrisTiles.lineStringStyleAbove);
     }
   } else if (geom === 'polygon') {
@@ -216,14 +222,10 @@ terrestrisTiles.buildStyle = function(feature, resolution, styleArray, geom) {
 
     // set the alpha values
     if (fill && styleToUse[type].fillOpacity) {
-      color = ol.color.asArray(fill.getColor());
-      color[3] = styleToUse[type].fillOpacity;
-      fill.setColor(color);
+      setOpacity(fill, styleToUse[type].fillOpacity);
     }
     if (stroke && styleToUse[type].strokeOpacity) {
-      color = ol.color.asArray(stroke.getColor());
-      color[3] = styleToUse[type].strokeOpacity;
-      stroke.setColor(color);
+      setOpacity(stroke, styleToUse[type].strokeOpacity);
     }
     style.push(terrestrisTiles.polygonStyle);
   }
@@ -235,7 +237,7 @@ terrestrisTiles.buildStyle = function(feature, resolution, styleArray, geom) {
         var coords = feature.getGeometry().b;
         var point = new ol.geom.Point([coords[0], coords[1]]);
         terrestrisTiles.iconStyle.setGeometry(point);
-        terrestrisTiles.iconStyle.getText().setText(text);
+        terrestrisTiles.iconStyle.getText().setText(props.ref || props.name);
         style.push(terrestrisTiles.iconStyle);
       }
     } else if (resolution < 300) {
@@ -257,6 +259,17 @@ terrestrisTiles.buildStyle = function(feature, resolution, styleArray, geom) {
 };
 
 /**
+ * Sets the opacity on a style
+ * @param  {ol.style.Fill or ol.style.Stroke} style The style to set the opacity on
+ * @param  {Number} opacity The opacity value to set
+ */
+setOpacity = function(style, opacity) {
+  var color = ol.color.asArray(style.getColor());
+  color[3] = opacity;
+  style.setColor(color);
+};
+
+/**
  * Creates and returns the terrestris OSM VectorTile layer
  *
  * @return {ol.layer.VectorTile} The terrestris OSM VectorTile layer
@@ -267,11 +280,8 @@ terrestrisTiles.getOSMLayer = function() {
     declutter: terrestrisTiles.useDeclutter,
     source: new ol.source.VectorTile({
       format: new ol.format.MVT(),
-      tileGrid: ol.tilegrid.createXYZ({
-        tileSize: [512,512]
-      }),
-      url: 'https://ows.terrestris.de/osm-vectortiles/' + 'osm:osm_world' +
-        '@EPSG%3A3857@pbf/{z}/{x}/{-y}.pbf',
+      url: 'https://ows.terrestris.de/osm-vectortiles/' + 'osm:osm_world_vector' +
+        '@mapbox-vector-tiles@pbf/{z}/{x}/{-y}.pbf',
       attributions: [terrestrisTiles.attribution]
     }),
     style: function(feature, resolution) {
@@ -284,14 +294,14 @@ terrestrisTiles.getOSMLayer = function() {
         case 'osm_roads_gen0':
           style = terrestrisTiles.buildStyle(feature, resolution, style_roads, 'line');
           break;
+        case 'osm_roads_gen1':
+          style = terrestrisTiles.buildStyle(feature, resolution, style_roads, 'line');
+          break;
         case 'osm_buildings':
           style = terrestrisTiles.buildStyle(feature, resolution, style_buildings, 'polygon');
           break;
-        case 'bluebackground':
+        case 'bluebackground_no_limit':
           style = terrestrisTiles.buildStyle(feature, resolution, style_bluebackground, 'polygon');
-          break;
-        case 'osm_admin':
-          style = terrestrisTiles.buildStyle(feature, resolution, style_admin, 'polygon');
           break;
         case 'osm_places':
           style = terrestrisTiles.buildLabelStyle(feature, resolution);
