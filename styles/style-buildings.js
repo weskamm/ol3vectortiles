@@ -96,61 +96,61 @@ var style_buildings = [{
             "fillColor": "#D1D1D1",
             "fillOpacity": 0.7,
             "strokeColor": "#B3B3B3",
-            "textPlacement": "point"
+            "useLabels": false
         },
         "house": {
             "fillColor": "#D1D1D1",
             "fillOpacity": 0.7,
             "strokeColor": "#B3B3B3",
-            "textPlacement": "point"
+            "useLabels": false
         },
         "apartments": {
             "fillColor": "#D1D1D1",
             "fillOpacity": 0.7,
             "strokeColor": "#B3B3B3",
-            "textPlacement": "point"
+            "useLabels": false
         },
         "terrace": {
             "fillColor": "#D1D1D1",
             "fillOpacity": 0.7,
             "strokeColor": "#B3B3B3",
-            "textPlacement": "point"
+            "useLabels": false
         },
         "garage": {
             "fillColor": "#D1D1D1",
             "fillOpacity": 0.7,
             "strokeColor": "#B3B3B3",
-            "textPlacement": "point"
+            "useLabels": false
         },
         "detached": {
             "fillColor": "#D1D1D1",
             "fillOpacity": 0.7,
             "strokeColor": "#B3B3B3",
-            "textPlacement": "point"
+            "useLabels": false
         },
         "dormitory": {
             "fillColor": "#D1D1D1",
             "fillOpacity": 0.7,
             "strokeColor": "#B3B3B3",
-            "textPlacement": "point"
+            "useLabels": false
         },
         "residential": {
             "fillColor": "#D1D1D1",
             "fillOpacity": 0.7,
             "strokeColor": "#B3B3B3",
-            "textPlacement": "point"
+            "useLabels": false
         },
         "university": {
             "fillColor": "#D1D1D1",
             "fillOpacity": 0.7,
             "strokeColor": "#B3B3B3",
-            "textPlacement": "point"
+            "useLabels": false
         },
         "school": {
             "fillColor": "#D1D1D1",
             "fillOpacity": 0.7,
             "strokeColor": "#B3B3B3",
-            "textPlacement": "point"
+            "useLabels": false
         },
         "hospital": {
             "fillColor": "#ce8f8f",
@@ -161,37 +161,37 @@ var style_buildings = [{
             "fillColor": "#D1D1D1",
             "fillOpacity": 0.7,
             "strokeColor": "#B3B3B3",
-            "textPlacement": "point"
+            "useLabels": false
         },
         "chapel": {
             "fillColor": "#D1D1D1",
             "fillOpacity": 0.7,
             "strokeColor": "#B3B3B3",
-            "textPlacement": "point"
+            "useLabels": false
         },
         "cathedral": {
             "fillColor": "#D1D1D1",
             "fillOpacity": 0.7,
             "strokeColor": "#B3B3B3",
-            "textPlacement": "point"
+            "useLabels": false
         },
         "hotel": {
             "fillColor": "#D1D1D1",
             "fillOpacity": 0.7,
             "strokeColor": "#B3B3B3",
-            "textPlacement": "point"
+            "useLabels": false
         },
         "commercial": {
             "fillColor": "#D1D1D1",
             "fillOpacity": 0.7,
             "strokeColor": "#B3B3B3",
-            "textPlacement": "point"
+            "useLabels": false
         },
         "train_station": {
             "fillColor": "#D1D1D1",
             "fillOpacity": 0.7,
             "strokeColor": "#B3B3B3",
-            "textPlacement": "point"
+            "useLabels": false
         },
     }
 }, {
@@ -202,12 +202,12 @@ var style_buildings = [{
             "fillColor": "#D1D1D1",
             "fillOpacity": 0.3,
             "strokeColor": "#B3B3B3",
-            "textPlacement": "point"
+            "useLabels": false
         },
         "hospital": {
             "fillColor": "#ce8f8f",
             "strokeColor": "#B3B3B3",
-            "textPlacement": "point"
+            "useLabels": false
         }
     }
 }];

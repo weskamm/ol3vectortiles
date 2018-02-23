@@ -304,7 +304,7 @@ var style_roads = [
             "colors": ["#888888", "#FFFFFF"],
             "widths": [5, 3],
             "caps": ["butt", "round"],
-            "opacity": 1,
+            "opacity": 1
         },
         "secondary": {
             "colors": ["#C1B59D", "#FFFFFF"],
@@ -334,45 +334,52 @@ var style_roads = [
             "colors": ["#888888", "#FFFFFF"],
             "widths": [4, 2],
             "caps": ["butt", "round"],
-            "opacity": 1
+            "opacity": 1,
+            "useLabels": false
         },
         "unclassified": {
             "colors": ["#C1B59D", "#FFFFFF"],
             "widths": [4, 2],
             "caps": ["butt", "round"],
-            "opacity": 1
+            "opacity": 1,
+            "useLabels": false
         },
         "residential": {
             "colors": ["#C1B59D"],
             "widths": [1],
             "caps": ["round"],
-            "opacity": 1
+            "opacity": 1,
+            "useLabels": false
         },
         "living_street": {
             "colors": ["#C1B59D", "#FFFFFF"],
             "widths": [4, 2],
             "caps": ["butt", "round"],
-            "opacity": 1
+            "opacity": 1,
+            "useLabels": false
         },
         "pedestrian": {
             "colors": ["#C1B59D", "#FAFAF5"],
             "widths": [2.5, 0.75],
             "caps": ["butt", "round"],
-            "opacity": 1
+            "opacity": 1,
+            "useLabels": false
         },
         "track": {
             "colors": ["#C1B59D"],
             "widths": [1],
             "caps": ["round"],
             "dasharray": "2.0 3.0",
-            "opacity": 1
+            "opacity": 1,
+            "useLabels": false
         },
         "footway": {
             "colors": ["#C1B59D"],
             "widths": [1],
             "caps": ["round"],
             "dasharray": "2.0 3.0",
-            "opacity": 1
+            "opacity": 1,
+            "useLabels": false
         }
     }
 }, {
