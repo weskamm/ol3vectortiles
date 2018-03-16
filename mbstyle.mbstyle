@@ -1,0 +1,262 @@
+{
+  "version": 8,
+  "name": "osm_world_vector",
+  "sources": {
+    "osm_world_vector" : {
+      "type": "vector",
+      "tiles": [
+        "https://ows.terrestris.de/osm-vectortiles/osm:osm_world_vector@mapbox-vector-tiles@pbf/{z}/{x}/{-y}.pbf"
+      ]
+    }
+  },
+  "layers": [
+    {
+      "id": "label",
+      "source": "osm_world_vector",
+      "source-layer": "osm_places",
+      "type": "symbol",
+      "layout": {
+        "text-field": "{name}",
+        "text-font": ["Sans"],
+        "text-size": 14,
+        "text-anchor": "center"
+      },
+      "paint": {
+        "text-color": "333333",
+        "text-halo-color": "#ffffff",
+        "text-halo-width": 3
+      }
+    },
+    {
+      "id": "forest",
+      "source": "osm_world_vector",
+      "source-layer": "osm_landusages",
+      "filter": ["==", "type", "forest"],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#CCDEAC",
+        "fill-opacity": "0.85"
+      }
+    },
+    {
+      "id": "wood",
+      "source": "osm_world_vector",
+      "source-layer": "osm_landusages",
+      "filter": ["==", "type", "wood"],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#CCDEAC",
+        "fill-opacity": "0.85"
+      }
+    },
+    {
+      "id": "farm",
+      "source": "osm_world_vector",
+      "source-layer": "osm_landusages",
+      "filter": ["==", "type", "farm"],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#DCE8A9",
+        "fill-opacity": "0.85"
+      }
+    },
+    {
+      "id": "meadow",
+      "source": "osm_world_vector",
+      "source-layer": "osm_landusages",
+      "filter": ["==", "type", "meadow"],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#DCE8A9",
+        "fill-opacity": "0.85"
+      }
+    },
+    {
+      "id": "grass",
+      "source": "osm_world_vector",
+      "source-layer": "osm_landusages",
+      "filter": ["==", "type", "grass"],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#DCE8A9",
+        "fill-opacity": "0.85"
+      }
+    },
+    {
+      "id": "pedestrian",
+      "source": "osm_world_vector",
+      "source-layer": "osm_landusages",
+      "filter": ["==", "type", "pedestrian"],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#FAFAF5",
+        "fill-opacity": "0.85"
+      }
+    },
+    {
+      "id": "industrial",
+      "source": "osm_world_vector",
+      "source-layer": "osm_landusages",
+      "filter": ["==", "type", "industrial"],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#D1D0CD",
+        "fill-opacity": "0.85"
+      }
+    },
+    {
+      "id": "commercial",
+      "source": "osm_world_vector",
+      "source-layer": "osm_landusages",
+      "filter": ["==", "type", "commercial"],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#D1D0CD",
+        "fill-opacity": "0.85"
+      }
+    },
+    {
+      "id": "parking",
+      "source": "osm_world_vector",
+      "source-layer": "osm_landusages",
+      "filter": ["==", "type", "parking"],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#D1D0CD",
+        "fill-opacity": "0.85"
+      }
+    },
+    {
+      "id": "cemetery",
+      "source": "osm_world_vector",
+      "source-layer": "osm_landusages",
+      "filter": ["==", "type", "cemetery"],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#D1D1D1",
+        "fill-opacity": "0.85"
+      }
+    },
+    {
+      "id": "park",
+      "source": "osm_world_vector",
+      "source-layer": "osm_landusages",
+      "filter": ["==", "type", "park"],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#B5D29C",
+        "fill-opacity": "0.85"
+      }
+    },
+    {
+      "id": "golf_course",
+      "source": "osm_world_vector",
+      "source-layer": "osm_landusages",
+      "filter": ["==", "type", "golf_course"],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#B5D29C",
+        "fill-opacity": "0.85"
+      }
+    },
+    {
+      "id": "hospital",
+      "source": "osm_world_vector",
+      "source-layer": "osm_landusages",
+      "filter": ["==", "type", "hospital"],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#E5C6C3",
+        "fill-opacity": "0.85"
+      }
+    },
+    {
+      "id": "school",
+      "source": "osm_world_vector",
+      "source-layer": "osm_landusages",
+      "filter": ["==", "type", "school"],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#DED2AC",
+        "fill-opacity": "0.85"
+      }
+    },
+    {
+      "id": "college",
+      "source": "osm_world_vector",
+      "source-layer": "osm_landusages",
+      "filter": ["==", "type", "college"],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#D1D0CD",
+        "fill-opacity": "0.85"
+      }
+    },
+    {
+      "id": "industrial",
+      "source": "osm_world_vector",
+      "source-layer": "osm_landusages",
+      "filter": ["==", "type", "industrial"],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#DED2AC",
+        "fill-opacity": "0.85"
+      }
+    },
+    {
+      "id": "university",
+      "source": "osm_world_vector",
+      "source-layer": "osm_landusages",
+      "filter": ["==", "type", "university"],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#DED2AC",
+        "fill-opacity": "0.85"
+      }
+    },
+    {
+      "id": "sports_center",
+      "source": "osm_world_vector",
+      "source-layer": "osm_landusages",
+      "filter": ["==", "type", "sports_center"],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#DED1AB",
+        "fill-opacity": "0.85"
+      }
+    },
+    {
+      "id": "stadium",
+      "source": "osm_world_vector",
+      "source-layer": "osm_landusages",
+      "filter": ["==", "type", "stadium"],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#DED1AB",
+        "fill-opacity": "0.85"
+      }
+    },
+    {
+      "id": "pitch",
+      "source": "osm_world_vector",
+      "source-layer": "osm_landusages",
+      "filter": ["==", "type", "pitch"],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#DED1AB",
+        "fill-opacity": "0.85"
+      }
+    },
+    {
+      "id": "residential",
+      "source": "osm_world_vector",
+      "source-layer": "osm_landusages",
+      "filter": ["==", "type", "residential"],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#F2EFE9",
+        "fill-opacity": "0.85"
+      }
+    }
+  ]
+}

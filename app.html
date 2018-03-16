@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mapbox Vectortiles with Mapbox styling</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.4/css/ol.css" type="text/css">
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="https://openlayers.org/en/v4.6.4/build/ol.js"></script>
+    <script src="https://rawgit.com/boundlessgeo/mapbox-to-ol-style/v3.4.0/dist/mb2olstyle.js"></script>
+    <style>
+       html, body {
+          height: 100%;
+          margin: 0;
+      }
+      .map {
+          min-height: 98%;
+          background: #f8f4f0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <script>
+
+
+var layername = 'osm_world_vector';
+var projection = '900913';
+
+
+var layer = new ol.layer.VectorTile({
+  source: new ol.source.VectorTile({
+    tilePixelRatio: 1, // oversampling when > 1
+    tileGrid: ol.tilegrid.createXYZ({maxZoom: 19}),
+    format: new ol.format.MVT(),
+    url: 'https://ows.terrestris.de/osm-vectortiles/osm:osm_world_vector@mapbox-vector-tiles@pbf/{z}/{x}/{-y}.pbf'
+  }),
+  // declutter: true
+});
+
+var hillshade = new ol.layer.Tile({
+  source: new ol.source.TileWMS({
+    url: 'https://ows-tile.terrestris.de/geoserver/wms',
+    params: {'LAYERS': 'osm:srtm30hillshade'}
+  })
+});
+
+var map = new ol.Map({
+  target: 'map',
+  view: new ol.View({
+    center: [790320.6539545798, 6571348.649447821],
+    zoom: 13
+  })
+});
+
+function fetchAndApplyStyle() {
+    if (map.getLayers().getArray().length > 0) {
+        map.removeLayer(layer)
+    }
+    var client = new XMLHttpRequest();
+    client.open('GET', 'mbstyle.mbstyle');
+    client.onload = function() {
+        var glStyle = JSON.parse(client.responseText);
+        mb2olstyle(layer, glStyle, layername);
+        // map.addLayer(hillshade);
+        map.addLayer(layer);
+    };
+    client.send();
+}
+
+fetchAndApplyStyle();
+
+    </script>
+  </body>
+</html>
