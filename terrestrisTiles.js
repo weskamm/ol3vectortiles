@@ -105,6 +105,7 @@ terrestrisTiles.iconStyle = new ol.style.Style({
 terrestrisTiles.buildLabelStyle = function(feature, resolution) {
   var text = feature.get('name');
   var type = feature.get('type');
+  var population = feature.get('population');
   var fontString = 'px sans-serif';
   var fontSize;
   if (type === 'country') {
@@ -126,8 +127,9 @@ terrestrisTiles.buildLabelStyle = function(feature, resolution) {
   olText.setPlacement('point');
   olText.setText(text);
   olText.setFont(fontString);
+  var zIndex = population ? population : fontSize + 1000;
   terrestrisTiles.labelStyle.setZIndex(
-    terrestrisTiles.useDeclutter ? -1 : fontSize + 1000);
+    terrestrisTiles.useDeclutter ? -zIndex : zIndex);
   return [terrestrisTiles.labelStyle];
 };
 
@@ -147,7 +149,7 @@ terrestrisTiles.buildStyle = function(feature, resolution, styleArray, geom) {
   var props = feature.getProperties();
   var type = props.type || '';
   var text = props.name || props.ref || null;
-  var isHighWay = (props.type === 'motorway' || props.type === 'trunk') &&
+  var isHighWay = (type.indexOf('motorway') > -1 || type.indexOf('trunk') > -1) &&
       props.class === 'highway' && props.ref.indexOf('A') === 0;
   var styleToUse;
 
@@ -251,7 +253,9 @@ terrestrisTiles.buildStyle = function(feature, resolution, styleArray, geom) {
       olText.setPlacement(styleToUse[type].textPlacement || 'line');
       olText.setText(text);
       olText.setFont(styleToUse[type].font || '13px sans-serif');
-      terrestrisTiles.labelStyle.setZIndex(100);
+      var zIndex = feature.get('z_order') || 1;
+      terrestrisTiles.labelStyle.setZIndex(terrestrisTiles.useDeclutter ?
+        -zIndex : zIndex);
       style.push(terrestrisTiles.labelStyle);
     }
   }
