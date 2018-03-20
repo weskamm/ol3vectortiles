@@ -4,7 +4,7 @@ A simple library that makes use of free available world-wide terrestris vectorti
 The main method `getOSMLayer` creates an openlayers VectorTile Layer, which you
 can use straight in your openlayers application.
 
-![example](https://rawgit.com/weskamm/ol3vectortiles/master/terrestris-vectortiles.png "Example")
+![example](https://rawgit.com/weskamm/ol3vectortiles/master/terrestris-vectortiles.png 'Example')
 
 # demo
 A simple demonstration application can be found here:
@@ -42,13 +42,13 @@ before calling `getOSMLayer` in order to disable decluttering of labels. This wi
 # Complete example
 ```
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>terrestris OSM Vectortiles with OL4</title>
-    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.4/css/ol.css" type="text/css">
+    <link rel='stylesheet' href='https://openlayers.org/en/v4.6.4/css/ol.css' type='text/css'>
     <script src='https://openlayers.org/en/v4.6.4/build/ol.js'></script>
     <script src='https://rawgit.com/weskamm/ol3vectortiles/master/styles/style-admin.js'></script>
     <script src='https://rawgit.com/weskamm/ol3vectortiles/master/styles/style-bluebackground.js'></script>
@@ -58,7 +58,7 @@ before calling `getOSMLayer` in order to disable decluttering of labels. This wi
     <script src='https://rawgit.com/weskamm/ol3vectortiles/master/styles/style-waterways.js'></script>
     <script src='https://rawgit.com/weskamm/ol3vectortiles/master/styles/style-waterareas.js'></script>
     <script src='https://rawgit.com/weskamm/ol3vectortiles/master/styles/style-countries.js'></script>
-    <link rel="stylesheet" href="https://rawgit.com/weskamm/ol3vectortiles/master/app.css" type="text/css">
+    <link rel='stylesheet' href='https://rawgit.com/weskamm/ol3vectortiles/master/app.css' type='text/css'>
     <script src='https://rawgit.com/weskamm/ol3vectortiles/master/terrestrisTiles.js'></script>
   </head>
   <body>

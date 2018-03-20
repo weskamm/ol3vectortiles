@@ -1,0 +1,35 @@
+{
+  "name": "terrestristiles",
+  "version": "0.0.1",
+  "description": "A simple library that makes use of free available world-wide terrestris vectortiles in MapBox MVT format from OpenStreetMap data.",
+  "main": "terrestrisTiles.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --ext js .",
+    "lint:fix": "npm run lint -- --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weskamm/ol3vectortiles.git"
+  },
+  "keywords": [
+    "ol3",
+    "openlayers",
+    "mvt",
+    "vectortiles"
+  ],
+  "author": "Johannes Weskamm",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/weskamm/ol3vectortiles/issues"
+  },
+  "homepage": "https://github.com/weskamm/ol3vectortiles#readme",
+  "dependencies": {
+    "ol": "4.6.5"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.2",
+    "eslint": "^4.19.0",
+    "eslint-plugin-html": "^4.0.2"
+  }
+}
