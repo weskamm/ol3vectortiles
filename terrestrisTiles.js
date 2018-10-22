@@ -13,7 +13,7 @@ terrestrisTiles.babImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0A
 
 
 // the OSM-attribution
-terrestrisTiles.attribution = new ol.Attribution({
+terrestrisTiles.attribution = new ol.control.Attribution({
   html: '© terrestris GmbH & Co. KG<br>' +
   'Data © OpenStreetMap <a href="http://www.openstreetmap.org/copyright/en" ' +
   'target="_blank">contributors</a>'
@@ -235,8 +235,8 @@ terrestrisTiles.buildStyle = function(feature, resolution, styleArray, geom) {
   if (styleToUse[type].useLabels !== false) {
     if (isHighWay && resolution < 300) {
       // try to extract coordinates from an ol.render.feature
-      if (feature.getGeometry().b && feature.getGeometry().b.length > 1) {
-        var coords = feature.getGeometry().b;
+      var coords = feature.getGeometry().getFlatCoordinates();
+      if (coords && coords.length > 1) {
         var point = new ol.geom.Point([coords[0], coords[1]]);
         terrestrisTiles.iconStyle.setGeometry(point);
         terrestrisTiles.iconStyle.getText().setText(props.ref || props.name);
